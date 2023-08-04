@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Document</title>
+     </head>
+     <body>
+          <!-- <script src="./app.js"></script> -->
+          <p id="changingText">Đây là đoạn văn mẫu để thực hiện việc thay đổi màu từng từ.</p>
+
+          <script>
+               const textElement = document.getElementById("changingText");
+               const originalText = textElement.innerText;
+               let currentIndex = 0;
+
+               function changeColor() {
+                    const words = originalText.split(" ");
+                    const word = words[currentIndex % words.length];
+                    const randomColor = getRandomColor();
+                    const formattedWord = `<span style="color: ${randomColor};">${word}</span>`;
+                    const newText = originalText.replace(word, formattedWord);
+                    textElement.innerHTML = newText;
+                    currentIndex++;
+               }
+
+               function getRandomColor() {
+                    const letters = "0123456789ABCDEF";
+                    let color = "#";
+                    for (let i = 0; i < 6; i++) {
+                         color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+               }
+
+               setInterval(changeColor, 1000);
+          </script>
+     </body>
+</html>
