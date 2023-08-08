@@ -22,37 +22,31 @@ console.log(`Fee: ${calculateFee(150)}đ`);
 
 /// Bài 2: Tính tiền điện
 
-function calculateElectric(electricConsumeNum) {
-     const priceElectric = [1.678, 1.734, 2.014, 2.536, 2.834, 2.927];
-     const stepNum = priceElectric.length;
-     let sum = 0;
-     let electricRemainingNum = electricConsumeNum;
-     for (let i = 0; i < stepNum; i++) {
-          // loop bậc
-          if (electricRemainingNum <= 0) break;
-          const priceElectricCurrent = priceElectric[i];
-          let electricNumCurrent;
-          if (i === stepNum - 1) {
-               electricNumCurrent = electricRemainingNum;
-          }
-          if (i === 0) {
-               electricNumCurrent = Math.min(electricRemainingNum, 50);
-          }
-          if (i === 1) {
-               electricNumCurrent = Math.min(electricRemainingNum, 50);
-          }
-          if (i > 1 && i < stepNum - 1) {
-               electricNumCurrent = Math.min(electricRemainingNum, 100);
-          }
+function tinhTiendien(soDienTieuThu) {
+     const giaDien = [1.678, 1.734, 2.014, 2.536, 2.834, 2.927];
+     const soBac = giaDien.length;
+     let total = 0;
 
-          sum = sum + priceElectricCurrent * electricNumCurrent;
-          electricRemainingNum = electricRemainingNum - electricNumCurrent;
+     let soDienTieuThuConLai = soDienTieuThu;
+
+     for (let i = 0; i < soBac; i++) {
+          if (soDienTieuThuConLai <= 0) break;
+          const giaDienHienTai = giaDien[i];
+          let soDienTieuThuHienTai;
+
+          if (i === soBac - 1) {
+               soDienTieuThuHienTai = soDienTieuThuConLai;
+          } else if (i === 0 || i === 1) {
+               soDienTieuThuHienTai = Math.min(soDienTieuThuConLai, 50);
+          } else {
+               soDienTieuThuHienTai = Math.min(soDienTieuThuConLai, 100);
+          }
+          total += giaDienHienTai * soDienTieuThuHienTai;
+          soDienTieuThuConLai -= soDienTieuThuHienTai;
      }
-     return sum;
+     return total;
 }
-
-const electricNum = 55;
-console.log(`Electricity bill this month : ${calculateElectric(555)}đ`);
+console.log(tinhTiendien(555));
 
 /// Bài 3: Tính giá trị biểu thức
 
@@ -96,13 +90,13 @@ if (isPrimeNumber(number)) {
 
 console.log("=============== Tam giác số ===============");
 function drawTriangleNumber(N) {
-     let counter = "*";
-     // let counter = 1;
+     // let counter = "*";
+     let counter = 1;
      for (let i = 1; i <= N; i++) {
           let row = "";
           for (let j = 1; j <= i; j++) {
                row += counter + " ";
-               // counter++;
+               counter++;
           }
           row += "\n";
           console.log(row);
