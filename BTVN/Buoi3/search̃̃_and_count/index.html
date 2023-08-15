@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Document</title>
+          <script src="https://cdn.tailwindcss.com"></script>
+          <link rel="stylesheet" href="../../output.css" />
+     </head>
+     <body class="bg-gradient-to-r from-cyan-400 to-blue-500">
+          <div
+               class="w-[1000px] h-[435px] border-4 border-pink-500 mx-auto mt-40 p-28 rounded-md bg-white relative">
+               <div
+                    class="absolute inline-block w-[700px] h-[700px] bg-pink-400 rounded-full -z-10 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"></div>
+               <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search ..."
+                    class="w-[300px] p-4 border-2 border-gray-300 rounded-md mb-4 outline-none focus:border-pink-500 focus:outline-pink-400 outline-offset-2" />
+               <p id="paragraph" class="text-lg text-gray-600 mb-4">
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
+                    in a piece of classical Latin literature from 45 BC, making it over 2000 years
+                    old. Richard McClintock, a Latin professor at Hampden-Sydney College in
+                    Virginia.
+               </p>
+               <p id="countDisplay" class="text-lg text-gray-600 text-pink-400"></p>
+          </div>
+          <script src="./app.js"></script>
+     </body>
+</html>

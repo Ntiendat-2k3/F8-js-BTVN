@@ -18,3 +18,6 @@ for (let i = 0; i < fullname1.length; i++) {
      }
 }
 console.log(fullname1);
+
+// 
+
