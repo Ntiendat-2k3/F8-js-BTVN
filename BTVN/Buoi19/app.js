@@ -36,8 +36,8 @@ var result = arrInt.reduce((total, currentValue) => {
      if (isPrime(currentValue)) {
           return total + currentValue;
      }
-     return total
-}, 0)
+     return total;
+}, 0);
 // console.log(sumIsPrime(arrInt));
 console.log(result);
 
