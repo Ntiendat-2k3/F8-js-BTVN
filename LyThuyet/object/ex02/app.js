@@ -91,7 +91,7 @@ var query = {
      keyword: "Fullstack",
      category: 1,
 };
-// name = Hoang+An&keyword=Fullstack&category=1
+// name=Hoang+An&keyword=Fullstack&category=1
 console.log(Object.entries(query));
 var resultX = Object.entries(query)
      .map((item) => {

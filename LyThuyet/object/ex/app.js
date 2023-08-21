@@ -1,5 +1,6 @@
 // Thêm phương thức vào prototype
 Object.prototype.combine = function (...args) {
+     console.log(args);
      var current = this;
      console.log(this);
      if (args.length > 0) {
@@ -9,8 +10,8 @@ Object.prototype.combine = function (...args) {
      }
 };
 // Thêm thuộc tính vào prototype
-Object.prototype.message = "F8";
 
+Object.prototype.message = "F8";
 var user = {
      name: "NTienDat",
      email: "nguyentiendatg2003@gmail.com",
@@ -29,5 +30,4 @@ console.log(a.message);
 var b = 1;
 console.log(b.message);
 
-//! Trừ null, undefined 
-
+//! Trừ null, undefined

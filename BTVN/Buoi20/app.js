@@ -1,4 +1,3 @@
-
 //  Bài 1
 var arrA = [1, 4, 3, 2];
 var arrB = [5, 2, 6, 7, 1];
@@ -64,7 +63,7 @@ function render() {
 
           return `
                <div class="item">
-                    <div class="item_img${imgClass}">
+                    <div class="item_img ${imgClass}">
                          <img
                               src="${item.img}"
                               alt="img"
