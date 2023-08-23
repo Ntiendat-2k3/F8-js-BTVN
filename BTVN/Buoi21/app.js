@@ -19,7 +19,7 @@ function getErrors(field) {
      // console.log(getError);
      if (getError) {
           const keys = Object.keys(getError);
-          // console.log(keys);
+          // console.log(typeof keys[0]); 
           if (keys.length > 0) {
                return getError[keys[0]];
           }
@@ -69,14 +69,14 @@ const data = [];
 function register(name, password, email) {
      // Kiểm tra thông tin có đầy đủ không
      if (!name || !password || !email) {
-          console.log("Thông tin không đầy đủ. Vui lòng nhập đầy đủ thông tin.");
+          console.log("Vui lòng nhập đầy đủ thông tin!");
           return;
      }
 
      // Kiểm tra xem email đã được đăng ký trước đó chưa
-     const existingUser = data.find((user) => user.email === email);
-     if (existingUser) {
-          console.log("Email đã được sử dụng. Vui lòng sử dụng email khác.");
+     const existingEmail = data.find((user) => user.email === email);
+     if (existingEmail) {
+          console.log("Email đã tồn tại!");
           return;
      }
 
@@ -84,7 +84,7 @@ function register(name, password, email) {
      data.push(newUser);
      console.log("Đăng ký thành công!");
      return newUser;
-}
+}    
 
 function login(email, password) {
      const user = data.find((user) => user.email === email && user.password === password);
@@ -92,17 +92,14 @@ function login(email, password) {
           console.log("Đăng nhập thành công!");
           return user;
      } else {
-          console.log("Thông tin đăng nhập không hợp lệ.");
+          console.log("Thông tin đăng nhập không hợp lệ");
           return null;
      }
 }
-
-const dataRegister1 = register("Nguyen Van A", "123456", "nguyenvana@email.com");
-const dataRegister2 = register("Nguyen Van B", "1234567", "nguyenvanb@email.com");
-
-const dataLogin = login("nguyenvanb@email.com", "1234567");
-
+register("Isaac McCoy", "123456", "IsaacMcCoy@email.com");
+register("Adam Sparks", "1234567", "AdamSparks@email.com");
+const formLogin = login("AdamSparks@email.com", "1234567");
 console.log("data =", data);
-console.log("dataLogin =", dataLogin);
+console.log("dataLogin =", formLogin);
 
 
