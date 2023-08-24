@@ -93,7 +93,7 @@ function login(email, password) {
           return user;
      } else {
           console.log("Thông tin đăng nhập không hợp lệ");
-          return null;
+          return "Tai khoan khong ton tai";
      }
 }
 register("Isaac McCoy", "123456", "IsaacMcCoy@email.com");

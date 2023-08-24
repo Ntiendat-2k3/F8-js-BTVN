@@ -55,13 +55,16 @@ console.log(Number("10a123")); // NaN
 console.log(+"10a123"); // NaN
 
 // BT : Tính tổng các số chẵn của mảng sau
-var numbers = [1, 2, 3, 4, 5];
+var numbers = [1, 2, 3, 4, 5, "abc", 6, NaN, 7];
 const result = numbers.reduce((total, curr) => {
      if (typeof curr === "number" && !Number.isNaN(curr) && curr !== Infinity) {
           return total + curr;
      }
-});
-console.log(result);
+     return total;
+}, 0); 
+console.log(result); 
+
+
 
 // toFixed(): Lấy số chữ số phần thập phân => trả về 1 chuỗi
 var a = 10.567;

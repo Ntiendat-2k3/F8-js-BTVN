@@ -57,7 +57,7 @@ console.log(result);
 // Bài 4
 import array from "./article.js";
 function render() {
-     const result = array.map((item, index) => {
+     const result = array?.map((item, index) => {
           const isOdd = index % 2 !== 0;
           const imgClass = isOdd ? " odd" : "";
 
@@ -70,9 +70,9 @@ function render() {
                          />
                     </div>
                     <div class="item_content">
-                         <h2 class="item_title">${item.title}</h2>
+                         <h2 class="item_title">${item.title || "Tiêu đề"}</h2>
                          <p class="item_desc">
-                              ${item.desc}
+                              ${item.desc || "Mô tả"}
                          </p>
                     </div>
                </div>
