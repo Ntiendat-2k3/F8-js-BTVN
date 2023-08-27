@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Document</title>
+          <script src="https://cdn.tailwindcss.com"></script>
+     </head>
+     <body class="p-5 bg-gray-700">
+          <button
+               onclick="handleClick()"
+               class="btn p-5 rounded-lg w-[200px] bg-green-400 text-white text-lg">
+               Register
+          </button>
+          <button
+               onclick="handleClick()"
+               class="login-btn p-5 rounded-lg w-[200px] bg-green-400 text-white text-lg my-3">
+               Login
+          </button>
+          <input
+               class="p-5 border border-blue-500 outline-none rounded-lg"
+               type="text"
+               placeholder="Enter your name..."
+               oninput="handleInput()" />
+          <script src="./app.js"></script>
+     </body>
+</html>
