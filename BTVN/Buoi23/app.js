@@ -9,7 +9,7 @@ const formRegister = $(".form-register");
 const overlay = $(".overlay");
 const btn = $(".btn");
 const container = $(".container");
-const iconEye = $(".iconEye");
+const iconEyes = $$(".iconEye");
 const password = $(".password");
 const email = $(".email");
 const user = $("#user");
@@ -33,17 +33,21 @@ btn.addEventListener("click", function () {
 overlay.addEventListener("click", function () {
      toggleContainer(false);
 });
-iconEye.addEventListener("click", function () {
-     if (password.type === "password") {
+[...iconEyes].map(display => display.addEventListener("click", function () {
+     if (password.type === "password" || passwordRegister.type === "password") {
           password.type = "text";
-          iconEye.classList.remove("fa-eye");
-          iconEye.classList.add("fa-eye-slash");
+          passwordRegister.type = "text";
+          display.classList.remove("fa-eye");
+          display.classList.add("fa-eye-slash");
+          // display.classList.toggle("fa-eye-slash");
      } else {
           password.type = "password";
-          iconEye.classList.remove("fa-eye-slash");
-          iconEye.classList.add("fa-eye");
+          passwordRegister.type = "password";
+          display.classList.remove("fa-eye-slash");
+          display.classList.add("fa-eye");
+          // display.classList.toggle("fa-eye-slash");
      }
-});
+}));
 function toggleContainer(show) {
      if (show) {
           container.classList.add("open");
