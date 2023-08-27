@@ -185,7 +185,5 @@ submitRegisterBtn.addEventListener("click", function (e) {
      }
 
      if (isUserValid && isEmailValid && isPasswordValid) {
-          // All fields are valid, you can submit the registration form here.
-          // Optionally, you can display a success message or redirect the user.
      }
 });
