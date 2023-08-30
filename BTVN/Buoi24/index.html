@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Document</title>
+          <script src="https://cdn.tailwindcss.com"></script>
+          <link rel="stylesheet" href="./style.css" />
+     </head>
+     <body class="bg-[#8758ff] flex justify-center items-center mt-10">
+          <div class="bg-[#1A1A40] p-8 rounded-lg w-full max-w-[555px] text-center">
+               <h1 class="text-white text-3xl font-medium mb-10">Get Things Done !</h1>
+               <form class="w-full flex" autocomplete="off">
+                    <input
+                         type="text"
+                         id="taskInput"
+                         placeholder="What is the task today ?"
+                         class="p-3 rounded-tl rounded-bl outline-none w-[80%] border border-purple-600 bg-transparent text-white" />
+                    <button
+                         id="addTask"
+                         class="p-3 bg-purple-600 w-[20%] rounded-tr rounded-br text-white text-base border border-purple-600">
+                         Add Task
+                    </button>
+               </form>
+               <ul id="taskList" class="mt-6 flex flex-col gap-4">
+                    <!-- <li
+                         class="w-full bg-purple-600 text-white h-[50px] rounded-lg flex justify-between items-center p-5 text-lg cursor-pointer">
+                         <span class="">a</span>
+                         <div class="icons flex gap-4">
+                              <img src="./icons/edit.svg" alt="edit" class="w-4 h-4" />
+                              <img src="./icons/delete.svg" alt="delete" class="w-4 h-4" />
+                         </div>
+                    </li> -->
+               </ul>
+          </div>
+
+          <script src="./app.js"></script>
+     </body>
+</html>
