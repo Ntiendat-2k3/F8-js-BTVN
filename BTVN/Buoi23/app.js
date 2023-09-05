@@ -33,21 +33,23 @@ btn.addEventListener("click", function () {
 overlay.addEventListener("click", function () {
      toggleContainer(false);
 });
-[...iconEyes].map(display => display.addEventListener("click", function () {
-     if (password.type === "password" || passwordRegister.type === "password") {
-          password.type = "text";
-          passwordRegister.type = "text";
-          display.classList.remove("fa-eye");
-          display.classList.add("fa-eye-slash");
-          // display.classList.toggle("fa-eye-slash");
-     } else {
-          password.type = "password";
-          passwordRegister.type = "password";
-          display.classList.remove("fa-eye-slash");
-          display.classList.add("fa-eye");
-          // display.classList.toggle("fa-eye-slash");
-     }
-}));
+[...iconEyes].map((display) =>
+     display.addEventListener("click", function () {
+          if (password.type === "password" || passwordRegister.type === "password") {
+               password.type = "text";
+               passwordRegister.type = "text";
+               display.classList.remove("fa-eye");
+               display.classList.add("fa-eye-slash");
+               // display.classList.toggle("fa-eye-slash");
+          } else {
+               password.type = "password";
+               passwordRegister.type = "password";
+               display.classList.remove("fa-eye-slash");
+               display.classList.add("fa-eye");
+               // display.classList.toggle("fa-eye-slash");
+          }
+     })
+);
 function toggleContainer(show) {
      if (show) {
           container.classList.add("open");
@@ -185,5 +187,7 @@ submitRegisterBtn.addEventListener("click", function (e) {
      }
 
      if (isUserValid && isEmailValid && isPasswordValid) {
+          clearError(errorEmailRegister);
+          clearError(errorPasswordRegister);
      }
 });
