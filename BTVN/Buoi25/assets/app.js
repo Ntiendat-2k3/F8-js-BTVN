@@ -1,37 +1,58 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const sliderMain = $(".slider-main");
-const sliderItems = $$(".slider-item");
-const sliderItemWidth = sliderItems[0].offsetWidth;
 const prev = $(".slider-prev");
 const next = $(".slider-next");
-const dotItems = $$(".slider-dot-item");
-let position = 0;
+const sliderMain = $(".slider-main");
+const sliderItems = $$(".slider-item");
+const sliderDots = $(".slider-dots");
+
 let index = 0;
+let position = 0;
+const sliderItemWidth = sliderItems[0].offsetWidth;
 
-next.addEventListener("click", () => handleChangeSlide(1));
-prev.addEventListener("click", () => handleChangeSlide(-1));
-
-dotItems.forEach((item, index) => {
-     item.addEventListener("click", () => handleDotClick(index));
-});
-
-function handleChangeSlide(direction) {
-     index += direction;
-     index = Math.min(Math.max(index, 0), sliderItems.length - 1);
-     position = -index * sliderItemWidth;
-     updateSlider();
+for (let i = 0; i < sliderItems.length; i++) {
+     const dotItem = document.createElement("li");
+     dotItem.classList.add("slider-dot-item");
+     dotItem.setAttribute("data-index", i.toString());
+     sliderDots.appendChild(dotItem);
 }
 
-function handleDotClick(clickedIndex) {
-     index = clickedIndex;
-     position = -index * sliderItemWidth;
-     updateSlider();
-}
+const dotItems = $$(".slider-dot-item");
 
-function updateSlider() {
-     sliderMain.style.transform = `translateX(${position}px)`;
-     dotItems.forEach((el) => el.classList.remove("active"));
+[...dotItems].forEach((item) =>
+     item.addEventListener("click", function (e) {
+          [...dotItems].forEach((el) => el.classList.remove("active"));
+          e.target.classList.add("active");
+          const currIndex = parseInt(e.target.getAttribute("data-index"));
+          position = -currIndex * sliderItemWidth;
+          sliderMain.style.transform = `translateX(${position}px)`;
+          index = currIndex;
+     })
+);
+
+next.addEventListener("click", () => handleChangeSlider(1));
+prev.addEventListener("click", () => handleChangeSlider(-1));
+
+function handleChangeSlider(direction) {
+     if (direction === 1) {
+          if (index >= sliderItems.length - 1) {
+               index = sliderItems.length - 1;
+               return;
+          }
+          position -= sliderItemWidth;
+          sliderMain.style.transform = `translateX(${position}px)`;
+          index++;
+     }
+     if (direction === -1) {
+          if (index <= 0) {
+               index = 0;
+               return;
+          }
+          position += sliderItemWidth;
+          sliderMain.style.transform = `translateX(${position}px)`;
+          index--;
+     }
+     [...dotItems].forEach((el) => el.classList.remove("active"));
      dotItems[index].classList.add("active");
 }
