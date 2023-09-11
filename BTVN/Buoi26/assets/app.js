@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
      let playing = true;
      const list = ["Arcade.mp3", "AsYouFadeAway.mp3", "CuoiCungThi.mp3"];
      let songIndex = 0;
-
+     playButton.addEventListener("click", handleMusicPlay);
      nextButton.addEventListener("click", function () {
           handleChangeMusic(1);
      });
@@ -20,11 +20,8 @@ window.addEventListener("load", function () {
      song.addEventListener("ended", function () {
           handleChangeMusic(1);
      });
-
-     //
      function handleChangeMusic(dir) {
           if (dir === 1) {
-               // next music
                songIndex++;
                if (songIndex > list.length - 1) {
                     songIndex = 0;
@@ -32,21 +29,16 @@ window.addEventListener("load", function () {
                song.setAttribute("src", `./mp3/${list[songIndex]}`);
                playing = true;
                handleMusicPlay();
-               console.log("next music");
           } else if (dir === -1) {
-               // prev music
                songIndex--;
                if (songIndex < 0) {
                     songIndex = list.length - 1;
                }
-               song.setAttribute("src", `.mp3/${list[songIndex]}`);
+               song.setAttribute("src", `./mp3/${list[songIndex]}`);
                playing = true;
                handleMusicPlay();
-               console.log("prev music");
           }
      }
-
-     playButton.addEventListener("click", handleMusicPlay);
      function handleMusicPlay() {
           if (playing) {
                song.play();
@@ -60,33 +52,26 @@ window.addEventListener("load", function () {
                playing = true;
           }
      }
-
      function displayTimer() {
           const { duration, currentTime } = song;
-
-          progressBar.max = duration; //: = thời lượng bài đó để nó dừng
-          progressBar.value = currentTime; //: để nó chạy theo
-
-          remaining.textContent = formatTimer(currentTime); //: thời gian bên phải
-
+          progressBar.max = duration;
+          progressBar.value = currentTime;
+          remaining.textContent = formatTimer(currentTime);
           if (!duration) {
                playerDuration.textContent = "0:00";
           } else {
                playerDuration.textContent = formatTimer(duration);
           }
      }
-
      function formatTimer(number) {
           const minutes = Math.floor(number / 60);
           const seconds = Math.floor(number - minutes * 60);
           return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
      }
-
      progressBar.addEventListener("change", handleDragProgressBar);
      function handleDragProgressBar() {
           song.currentTime = progressBar.value;
      }
-
      displayTimer();
      const timer = setInterval(displayTimer, 500);
 });
