@@ -1,0 +1,67 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body {
+     padding: 20px;
+}
+table {
+     width: 100%;
+}
+thead {
+     font-size: 18px;
+}
+th:nth-child(2) {
+     flex: 1;
+}
+td {
+     margin-top: 10px;
+     border-bottom: 1px solid #333;
+     padding-bottom: 8px;
+}
+h3 {
+     margin: 20px 0;
+}
+
+tr td:not(:nth-child(2)){
+     text-align: center;
+}
+tr td:nth-child(2) {
+     padding-left: 100px;
+}
+tr td:last-child {
+     display: flex;
+     gap: 5px;
+     justify-content: center;
+}
+button {
+     cursor: pointer;
+     border: none;
+     background-color: #3498db;
+     color: #fff;
+     border-radius: 3px;
+}
+input {
+     width: 40%;
+}
+input,
+button {
+     padding: 6px;
+     outline: none;
+}
+/* #cart_table {
+     display: none;
+}
+.open {
+     display: block;
+} */
+hr {
+     margin-top: 20px;
+}
+#update_cart,
+#delete_cart {
+     display: inline-block;
+     margin-top: 10px;
+     padding: 12px;
+}
