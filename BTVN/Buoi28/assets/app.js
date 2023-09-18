@@ -1,132 +1,132 @@
-var progressBar = document.querySelector(".progress-bar");
-var progress = progressBar.querySelector(".progress");
-var progressSpan = progress.querySelector("span");
+// var progressBar = document.querySelector(".progress-bar");
+// var progress = progressBar.querySelector(".progress");
+// var progressSpan = progress.querySelector("span");
 
-var timer = document.querySelector(".timer");
+// var timer = document.querySelector(".timer");
 
-var isDrag = false;
-var value = 0;
-var initialClientX = 0;
-var initialValue = 0;
+// var isDrag = false;
+// var value = 0;
+// var initialClientX = 0;
+// var initialValue = 0;
 
-var audio = document.querySelector(".audio");
-var currentTimeEl = progressBar.previousElementSibling;
-var durationTimeEl = progressBar.nextElementSibling;
-var playBtn = document.querySelector(".play-btn");
+// var audio = document.querySelector(".audio");
+// var currentTimeEl = progressBar.previousElementSibling;
+// var durationTimeEl = progressBar.nextElementSibling;
+// var playBtn = document.querySelector(".play-btn");
 
-var playIcon = `<i class="fa-solid fa-play"></i>`;
-var pauseIcon = `<i class="fa-solid fa-pause"></i>`;
-var progressBarWidth = progressBar.clientWidth;
+// var playIcon = `<i class="fa-solid fa-play"></i>`;
+// var pauseIcon = `<i class="fa-solid fa-pause"></i>`;
+// var progressBarWidth = progressBar.clientWidth;
 
-var getTime = function (second) {
-     var minute = Math.floor(second / 60);
-     var second = Math.floor(second - minute * 60);
-     second = second < 10 ? `0${second}` : second;
-     minute = minute < 10 ? `0${minute}` : minute;
-     return `${minute}:${second}`;
-};
+// var getTime = function (second) {
+//      var minute = Math.floor(second / 60);
+//      var second = Math.floor(second - minute * 60);
+//      second = second < 10 ? `0${second}` : second;
+//      minute = minute < 10 ? `0${minute}` : minute;
+//      return `${minute}:${second}`;
+// };
 
-var handleUpdateValue = function (value) {
-     if (value > 100) {
-          value = 100;
-     }
-     if (value < 0) {
-          value = 0;
-     }
-     progress.style.width = `${value}%`;
-};
+// var handleUpdateValue = function (value) {
+//      if (value > 100) {
+//           value = 100;
+//      }
+//      if (value < 0) {
+//           value = 0;
+//      }
+//      progress.style.width = `${value}%`;
+// };
 
-progressBar.addEventListener("mousedown", function (e) {
-     if (e.which === 1) {
-          value = (100 * e.offsetX) / progressBarWidth;
-          handleUpdateValue(value);
-          initialValue = value;
-          isDrag = true;
-          initialClientX = e.clientX;
-          var time = (audio.duration * value) / 100;
-          currentTimeEl.innerText = getTime(time);
-          audio.currentTime = time;
-     }
-});
+// progressBar.addEventListener("mousedown", function (e) {
+//      if (e.which === 1) {
+//           value = (100 * e.offsetX) / progressBarWidth;
+//           handleUpdateValue(value);
+//           initialValue = value;
+//           isDrag = true;
+//           initialClientX = e.clientX;
+//           var time = (audio.duration * value) / 100;
+//           currentTimeEl.innerText = getTime(time);
+//           audio.currentTime = time;
+//      }
+// });
 
-progressSpan.addEventListener("mousedown", function (e) {
-     e.stopPropagation();
-     isDrag = true;
-     initialClientX = e.clientX;
-});
+// progressSpan.addEventListener("mousedown", function (e) {
+//      e.stopPropagation();
+//      isDrag = true;
+//      initialClientX = e.clientX;
+// });
 
-document.addEventListener("mousemove", function (e) {
-     if (isDrag) {
-          var moveWidth = e.clientX - initialClientX;
-          value = (moveWidth / progressBarWidth) * 100 + initialValue;
-     }
-     handleUpdateValue(value);
-});
+// document.addEventListener("mousemove", function (e) {
+//      if (isDrag) {
+//           var moveWidth = e.clientX - initialClientX;
+//           value = (moveWidth / progressBarWidth) * 100 + initialValue;
+//      }
+//      handleUpdateValue(value);
+// });
 
-document.addEventListener("mouseup", function (e) {
-     if (isDrag) {
-          isDrag = false;
-          initialValue = value;
-          var time = (audio.duration * value) / 100;
-          currentTimeEl.innerText = getTime(time);
-          audio.currentTime = time;
-     }
-});
+// document.addEventListener("mouseup", function (e) {
+//      if (isDrag) {
+//           isDrag = false;
+//           initialValue = value;
+//           var time = (audio.duration * value) / 100;
+//           currentTimeEl.innerText = getTime(time);
+//           audio.currentTime = time;
+//      }
+// });
 
-audio.addEventListener("loadeddata", function () {
-     durationTimeEl.innerText = getTime(audio.duration);
-});
+// audio.addEventListener("loadeddata", function () {
+//      durationTimeEl.innerText = getTime(audio.duration);
+// });
 
-playBtn.addEventListener("click", function (e) {
-     e.stopPropagation();
-     if (audio.paused) {
-          audio.play();
-          playBtn.innerHTML = pauseIcon;
-     } else {
-          audio.pause();
-          playBtn.innerHTML = playIcon;
-     }
-});
+// playBtn.addEventListener("click", function (e) {
+//      e.stopPropagation();
+//      if (audio.paused) {
+//           audio.play();
+//           playBtn.innerHTML = pauseIcon;
+//      } else {
+//           audio.pause();
+//           playBtn.innerHTML = playIcon;
+//      }
+// });
 
-audio.addEventListener("timeupdate", function () {
-     if (!isDrag) {
-          value = (100 * audio.currentTime) / audio.duration;
-          progress.style.width = `${value}%`;
-          currentTimeEl.innerText = getTime(audio.currentTime);
-          handleLyric(audio.currentTime);
-     }
-});
+// audio.addEventListener("timeupdate", function () {
+//      if (!isDrag) {
+//           value = (100 * audio.currentTime) / audio.duration;
+//           progress.style.width = `${value}%`;
+//           currentTimeEl.innerText = getTime(audio.currentTime);
+//           handleLyric(audio.currentTime);
+//      }
+// });
 
-audio.addEventListener("ended", function () {
-     value = 0;
-     audio.currentTime = 0;
-     progress.style.width = `${value}%`;
-     playBtn.innerHTML = playIcon;
-});
+// audio.addEventListener("ended", function () {
+//      value = 0;
+//      audio.currentTime = 0;
+//      progress.style.width = `${value}%`;
+//      playBtn.innerHTML = playIcon;
+// });
 
-progressBar.addEventListener("mousemove", function (e) {
-     e.stopPropagation();
-     timer.style.display = "block";
-     timer.style.left = `${e.offsetX}px`;
-     var rate = (100 * e.offsetX) / progressBarWidth;
-     var time = (audio.duration * rate) / 100;
-     timer.innerText = getTime(time);
-});
+// progressBar.addEventListener("mousemove", function (e) {
+//      e.stopPropagation();
+//      timer.style.display = "block";
+//      timer.style.left = `${e.offsetX}px`;
+//      var rate = (100 * e.offsetX) / progressBarWidth;
+//      var time = (audio.duration * rate) / 100;
+//      timer.innerText = getTime(time);
+// });
 
-progressBar.addEventListener("mouseout", function () {
-     timer.style.display = "none";
-});
+// progressBar.addEventListener("mouseout", function () {
+//      timer.style.display = "none";
+// });
 
-progressSpan.addEventListener("mousemove", function (e) {
-     e.stopPropagation();
-});
+// progressSpan.addEventListener("mousemove", function (e) {
+//      e.stopPropagation();
+// });
 
-progressSpan.addEventListener("mouseover", function (e) {
-     e.stopPropagation();
-     timer.style.display = "none";
-});
+// progressSpan.addEventListener("mouseover", function (e) {
+//      e.stopPropagation();
+//      timer.style.display = "none";
+// });
 
-// Karaoke
+// // Karaoke
 var lyricData = ` [
       {
         "words": [
@@ -1999,53 +1999,233 @@ var lyricData = ` [
           }
         ]
       }
-    ]`;
+     ]`;
 
+// lyricData = JSON.parse(lyricData);
+
+// const btnDisplayLyric = document.querySelector(".open-karaoke button");
+// const btnHiddenLyric = document.querySelector(".close");
+// const karaoke = document.querySelector(".karaoke");
+// const karaokeInner = document.querySelector(".karaoke-inner");
+// const karaokeContent = document.querySelector(".karaoke-content");
+
+// var songInfo = `<p>Hạt mưa vương vấn</p>
+//                <p> Ca sỹ: Thành Đạt </p>`;
+// btnDisplayLyric.addEventListener("click", function () {
+//      karaoke.classList.add("show");
+//      karaokeContent.innerHTML = songInfo;
+// });
+// btnHiddenLyric.addEventListener("click", function () {
+//      karaoke.classList.remove("show");
+//      karaokeContent.innerHTML = "";
+// });
+
+// function handleLyric(time) {
+//      var time = time * 1000;
+//      var index = lyricData.findIndex(function (item) {
+//           var sentences = item.words;
+//           return time >= sentences[0].startTime && time <= sentences[sentences.length - 1].endTime;
+//      });
+//      if (index !== -1) {
+//           karaokeContent.innerText = "";
+
+//           var page = Math.floor(index / 2 + 1);
+//           var offset = (page - 1) * 2;
+//           var divEle = document.createElement("div");
+//           for (i = offset; i < offset + 2; i++) {
+//                var p = document.createElement("p");
+//                lyricData[i].words.forEach(function (word) {
+//                     var wordEle = document.createElement("span");
+//                     wordEle.classList.add("word");
+//                     wordEle.innerText = word.data + " ";
+//                     var spanEle = document.createElement("span");
+//                     spanEle.innerText = word.data;
+//                     wordEle.append(spanEle);
+//                     p.appendChild(wordEle);
+//                });
+//                divEle.append(p);
+//           }
+//           karaokeContent.append(divEle);
+//      } else {
+//           karaokeContent.innerHTML = songInfo;
+//      }
+// }
+const progressBar = document.querySelector(".progress-bar");
+const progress = progressBar.querySelector(".progress");
+const progressSpan = progress.querySelector("span");
+
+const timer = progressBar.querySelector(".timer");
+
+let isDrag = false;
+let value = 0;
+let initialClientX = 0;
+let initialValue = 0;
+
+const audio = document.querySelector(".audio");
+const currentTimeEl = progressBar.previousElementSibling;
+const durationTimeEl = progressBar.nextElementSibling;
+const playBtn = document.querySelector(".play-btn");
+
+const playIcon = `<i class="fa-solid fa-play"></i>`;
+const pauseIcon = `<i class="fa-solid fa-pause"></i>`;
+const progressBarWidth = progressBar.clientWidth;
+
+const getTime = (second) => {
+     const minute = Math.floor(second / 60);
+     second = Math.floor(second % 60);
+     return `${minute.toString().padStart(2, "0")}:${second.toString().padStart(2, "0")}`;
+};
+
+const clampValue = (value) => Math.min(100, Math.max(0, value));
+
+const updateProgress = (value) => {
+     value = clampValue(value);
+     progress.style.width = `${value}%`;
+};
+
+const updateCurrentTime = (time) => {
+     currentTimeEl.innerText = getTime(time);
+};
+
+const handleProgressBarMouseDown = (e) => {
+     if (e.which === 1) {
+          value = (100 * e.offsetX) / progressBarWidth;
+          initialValue = value;
+          isDrag = true;
+          initialClientX = e.clientX;
+          const time = (audio.duration * value) / 100;
+          updateCurrentTime(time);
+          audio.currentTime = time;
+          updateProgress(value);
+     }
+};
+
+progressBar.addEventListener("mousedown", handleProgressBarMouseDown);
+
+const handleDragMouseMove = (e) => {
+     if (isDrag) {
+          const moveWidth = e.clientX - initialClientX;
+          value = (moveWidth / progressBarWidth) * 100 + initialValue;
+          updateProgress(value);
+     }
+};
+
+document.addEventListener("mousemove", handleDragMouseMove);
+
+document.addEventListener("mouseup", () => {
+     if (isDrag) {
+          isDrag = false;
+          const time = (audio.duration * value) / 100;
+          updateCurrentTime(time);
+          audio.currentTime = time;
+     }
+});
+
+audio.addEventListener("loadeddata", () => {
+     durationTimeEl.innerText = getTime(audio.duration);
+});
+
+playBtn.addEventListener("click", (e) => {
+     e.stopPropagation();
+     if (audio.paused) {
+          audio.play();
+          playBtn.innerHTML = pauseIcon;
+     } else {
+          audio.pause();
+          playBtn.innerHTML = playIcon;
+     }
+});
+
+audio.addEventListener("timeupdate", () => {
+     if (!isDrag) {
+          value = (100 * audio.currentTime) / audio.duration;
+          updateProgress(value);
+          updateCurrentTime(audio.currentTime);
+          handleLyric(audio.currentTime);
+     }
+});
+
+audio.addEventListener("ended", () => {
+     value = 0;
+     audio.currentTime = 0;
+     updateProgress(value);
+     playBtn.innerHTML = playIcon;
+});
+
+const updateTimerPosition = (e) => {
+     e.stopPropagation();
+     timer.style.display = "block";
+     timer.style.left = `${e.offsetX}px`;
+     const rate = (100 * e.offsetX) / progressBarWidth;
+     const time = (audio.duration * rate) / 100;
+     timer.innerText = getTime(time);
+};
+
+progressBar.addEventListener("mousemove", updateTimerPosition);
+
+progressBar.addEventListener("mouseout", () => {
+     timer.style.display = "none";
+});
+
+progressSpan.addEventListener("mousemove", (e) => {
+     e.stopPropagation();
+});
+
+progressSpan.addEventListener("mouseover", (e) => {
+     e.stopPropagation();
+     timer.style.display = "none";
+});
+
+// Karaoke
 lyricData = JSON.parse(lyricData);
 
 const btnDisplayLyric = document.querySelector(".open-karaoke button");
 const btnHiddenLyric = document.querySelector(".close");
 const karaoke = document.querySelector(".karaoke");
-const karaokeInner = document.querySelector(".karaoke-inner");
 const karaokeContent = document.querySelector(".karaoke-content");
 
-var songInfo = `<p>Hạt mưa vương vấn</p>
+const songInfo = `<p>Hạt mưa vương vấn</p>
                <p> Ca sỹ: Thành Đạt </p>`;
-btnDisplayLyric.addEventListener("click", function () {
+
+btnDisplayLyric.addEventListener("click", () => {
      karaoke.classList.add("show");
      karaokeContent.innerHTML = songInfo;
 });
-btnHiddenLyric.addEventListener("click", function () {
+
+btnHiddenLyric.addEventListener("click", () => {
      karaoke.classList.remove("show");
      karaokeContent.innerHTML = "";
 });
 
-function handleLyric(time) {
-     var time = time * 1000;
-     var index = lyricData.findIndex(function (item) {
-          var sentences = item.words;
+const findLyricIndex = (time) => {
+     time *= 1000;
+     return lyricData.findIndex((item) => {
+          const sentences = item.words;
           return time >= sentences[0].startTime && time <= sentences[sentences.length - 1].endTime;
      });
+};
+
+function handleLyric(time) {
+     const index = findLyricIndex(time);
      if (index !== -1) {
           karaokeContent.innerText = "";
-
-          var page = Math.floor(index / 2 + 1);
-          var offset = (page - 1) * 2;
-          var divEle = document.createElement("div");
-          for (i = offset; i < offset + 2; i++) {
-               var p = document.createElement("p");
-               lyricData[i].words.forEach(function (word) {
-                    var wordEle = document.createElement("span");
+          const page = Math.floor(index / 2 + 1);
+          const offset = (page - 1) * 2;
+          const divEle = document.createElement("div");
+          for (let i = offset; i < offset + 2; i++) {
+               const p = document.createElement("p");
+               lyricData[i].words.forEach((word) => {
+                    const wordEle = document.createElement("span");
                     wordEle.classList.add("word");
                     wordEle.innerText = word.data + " ";
-                    var spanEle = document.createElement("span");
+                    const spanEle = document.createElement("span");
                     spanEle.innerText = word.data;
-                    wordEle.append(spanEle);
+                    wordEle.appendChild(spanEle);
                     p.appendChild(wordEle);
                });
-               divEle.append(p);
+               divEle.appendChild(p);
           }
-          karaokeContent.append(divEle);
+          karaokeContent.appendChild(divEle);
      } else {
           karaokeContent.innerHTML = songInfo;
      }
