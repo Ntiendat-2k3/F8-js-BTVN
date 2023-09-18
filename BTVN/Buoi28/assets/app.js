@@ -127,7 +127,7 @@ progressSpan.addEventListener("mouseover", function (e) {
 });
 
 // Karaoke
-var lyric = ` [
+var lyricData = ` [
       {
         "words": [
           {
@@ -2001,28 +2001,28 @@ var lyric = ` [
       }
     ]`;
 
-lyric = JSON.parse(lyric);
+lyricData = JSON.parse(lyricData);
 
-const btnOpenKara = document.querySelector(".open-karaoke button");
-const btnCloseKara = document.querySelector(".close");
+const btnDisplayLyric = document.querySelector(".open-karaoke button");
+const btnHiddenLyric = document.querySelector(".close");
 const karaoke = document.querySelector(".karaoke");
 const karaokeInner = document.querySelector(".karaoke-inner");
 const karaokeContent = document.querySelector(".karaoke-content");
 
 var songInfo = `<p>Hạt mưa vương vấn</p>
-  <p>Ca sỹ: Thành Đạt</p>`;
-btnOpenKara.addEventListener("click", function () {
+               <p> Ca sỹ: Thành Đạt </p>`;
+btnDisplayLyric.addEventListener("click", function () {
      karaoke.classList.add("show");
      karaokeContent.innerHTML = songInfo;
 });
-btnCloseKara.addEventListener("click", function () {
+btnHiddenLyric.addEventListener("click", function () {
      karaoke.classList.remove("show");
      karaokeContent.innerHTML = "";
 });
 
 function handleLyric(time) {
      var time = time * 1000;
-     var index = lyric.findIndex(function (item) {
+     var index = lyricData.findIndex(function (item) {
           var sentences = item.words;
           return time >= sentences[0].startTime && time <= sentences[sentences.length - 1].endTime;
      });
@@ -2034,7 +2034,7 @@ function handleLyric(time) {
           var divEle = document.createElement("div");
           for (i = offset; i < offset + 2; i++) {
                var p = document.createElement("p");
-               lyric[i].words.forEach(function (word) {
+               lyricData[i].words.forEach(function (word) {
                     var wordEle = document.createElement("span");
                     wordEle.classList.add("word");
                     wordEle.innerText = word.data + " ";
