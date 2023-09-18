@@ -12,6 +12,7 @@ btn.addEventListener("click", function () {
      btn.classList.add("bg-gray-400", "cursor-none");
      overlay.style.display = "block";
 });
+
 icon.addEventListener("click", function () {
      content.classList.remove("open");
      btn.disable = false;

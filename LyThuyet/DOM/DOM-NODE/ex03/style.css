@@ -1,0 +1,26 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body {
+     height: 2000px;
+}
+.header {
+     padding: 15px 0;
+}
+.header-inner {
+     padding: 10px;
+     text-align: center;
+}
+.header .menu {
+     background-color: green;
+     height: 35px;
+}
+.header .menu.fixed {
+     position: fixed;
+     top: 0px;
+     left: 0;
+     right: 0;
+     z-index: 100;
+}

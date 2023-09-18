@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <!-- Font awesome -->
+          <link
+               rel="stylesheet"
+               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+               crossorigin="anonymous"
+               referrerpolicy="no-referrer" />
+          <!-- Link css -->
+          <link rel="stylesheet" href="./assets/style.css" />
+          <title>Document</title>
+     </head>
+     <body>
+          <div class="play-btn">
+               <i class="fa-solid fa-play"></i>
+          </div>
+          <div class="player">
+               <span>00:00</span>
+               <div class="progress-bar">
+                    <div class="progress">
+                         <span></span>
+                    </div>
+                    <span class="timer"></span>
+               </div>
+               <span>00:00</span>
+          </div>
+          <div class="open-karaoke">
+               <button type="button">Hát Karaoke</button>
+          </div>
+          <div class="karaoke">
+               <div class="container">
+                    <div class="karaoke-header">
+                         <h2>Karaoke</h2>
+                         <span class="close">
+                              <i class="fa-angle-down fa-solid"></i>
+                         </span>
+                    </div>
+                    <div class="karaoke-inner">
+                         <div class="karaoke-content"></div>
+                    </div>
+               </div>
+          </div>
+          <audio src="./assets/audio/HatMuaVuongVan.mp3" class="audio"></audio>
+          <script src="./assets/app.js"></script>
+     </body>
+</html>

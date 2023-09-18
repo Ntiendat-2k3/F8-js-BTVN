@@ -1,0 +1,22 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+.bg {
+     position: fixed;
+     inset: 0;
+     background-color: #fff;
+     z-index: 99999;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height:100vh;
+     font-size: 24px;
+     transition: .4s linear;
+}
+.hide {
+     opacity: 0;
+     visibility: hidden;
+     transition: .4s linear;
+}
