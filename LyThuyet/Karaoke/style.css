@@ -1,0 +1,115 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+.container {
+     max-width: 80%;
+     margin: 0 auto;
+}
+.progress-bar {
+     height: 10px;
+     width: 100%;
+     background-color: gray;
+     position: relative;
+     cursor: pointer;
+     border-radius: 10px;
+}
+.progress {
+     background-color: red;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     border-radius: 10px;
+     /* width: 50%; */
+}
+.progress span {
+     position: absolute;
+     right: 0;
+     top: 50%;
+     display: block;
+     width: 23px;
+     height: 23px;
+     background-color: rebeccapurple;
+     border-radius: 50%;
+     transform: translate(50%, -50%);
+}
+.player {
+     margin: 30px 0;
+}
+.play-btn {
+     text-align: center;
+     font-size: 2rem;
+}
+.play-inner {
+     display: flex;
+     justify-content: space-between;
+     gap: 20px;
+}
+.karaoke .karaoke-play {
+     background-color: blueviolet;
+     color: #fff;
+     display: block;
+     margin: 0 auto;
+     padding: 5px 10px;
+     border: 0;
+     cursor: pointer;
+}
+.karaoke .karaoke-inner {
+     position: fixed;
+     inset: 0;
+     background-color: blueviolet;
+     color: #fff;
+     padding: 15px;
+     top: 100%;
+     transition: top 0.4s linear;
+}
+.karaoke .karaoke-inner.show {
+     top: 0;
+}
+.karaoke-heading {
+     display: flex;
+     justify-content: space-between;
+}
+.karaoke-content {
+     font-size: 2rem;
+     height: 50vh;
+     font-size: bold;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.karaoke-content p {
+     margin: 15px 0;
+}
+.karaoke-content p span.word {
+     position: relative;
+}
+.karaoke-content p span.word span {
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     width: 0;
+     overflow: hidden;
+     color: yellow;
+}
+.karaoke-heading .close {
+     cursor: pointer;
+     font-size: 1.2rem;
+}
+.player.bottom {
+     position: fixed;
+     left: 0;
+     right: 0;
+     bottom: 10px;
+     z-index: 1;
+     max-width: 90%;
+     margin: 0 auto;
+     color: #fff;
+}
+.player.bottom .progress span {
+     background-color: #fff;
+}

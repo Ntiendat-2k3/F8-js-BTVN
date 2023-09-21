@@ -1,0 +1,20 @@
+#list-container {
+     width: 300px;
+     border: 1px solid black;
+}
+
+.chapter,
+.lesson {
+     padding: 10px;
+     border: 1px solid gray;
+     margin: 5px;
+     cursor: move;
+}
+
+.dragging {
+     opacity: 0.5;
+}
+.placeholder {
+     background-color: #f5f5f5;
+     border: 1px dashed #ccc;
+}

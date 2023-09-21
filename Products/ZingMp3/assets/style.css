@@ -1,0 +1,151 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+html {
+     user-select: none;
+}
+body {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     overflow: hidden;
+     background-color: #17182d;
+     font-family: "Roboto", sans-serif;
+}
+.container {
+     max-width: 600px;
+     width: 100%;
+}
+.progress-bar {
+     position: relative;
+     width: 100%;
+     background-color: #666;
+     height: 1px;
+     cursor: pointer;
+}
+.progress {
+     position: absolute;
+     background-color: #fff;
+     top: 0;
+     left: 0;
+     background-color: #fff;
+     height: 100%;
+     width: 0;
+}
+.progress span {
+     position: absolute;
+     top: 0;
+     left: 100%;
+     transform: translate(-50%, -50%);
+     display: inline-block;
+     width: 5px;
+     height: 5px;
+     border-radius: 50%;
+     background-color: #fff;
+}
+.player {
+     display: flex;
+     flex-direction: column-reverse;
+     gap: 20px;
+}
+.play-btn {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+}
+.play-btn i {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 50px;
+     height: 50px;
+     color: #fff;
+     font-size: 20px;
+     border: 1px solid #999;
+     border-radius: 50%;
+}
+.play-inner {
+     display: flex;
+     gap: 20px;
+     align-items: center;
+     color: #fff;
+     font-weight: 400;
+     font-size: 14px;
+}
+.karaoke-play {
+     display: block;
+     margin: 30px auto;
+     padding: 8px 10px;
+     color: #fff;
+     font-size: 14px;
+     background-color: #17182d;
+     border-radius: 3px;
+     cursor: pointer;
+     transition:  0.2s linear;
+}
+.karaoke-play:hover {
+     background-color: #1f203a;
+}
+.karaoke-inner {
+     position: fixed;
+     inset: 0;
+     background-color: #1f203a;
+     color: #fff;
+     padding: 50px;
+     transition: .2s linear;
+}
+.karaoke-heading {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+.karaoke-heading h2 {
+     font-size: 40px;
+}
+.karaoke-heading span {
+     font-size: 30px;
+     cursor: pointer;
+     padding: 10px;
+}
+.karaoke-content {
+     margin-top: 30vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+}
+.karaoke-content p {
+     margin-top: 20px;
+     font-size: 30px;
+     font-weight: 600;
+}
+.karaoke-content p span.word {
+     position: relative;
+}
+.karaoke-content p span.word span{
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     width: 0;
+     overflow: hidden;
+     color: yellow;
+}
+
+.karaoke-inner.show {
+     transform: translateY(100%);
+}
+.player.bottom {
+     position: fixed;
+     top: 0;
+     left: 50%;
+     transform: translateX(-50%);
+     bottom: 50px;
+     z-index: 1;
+     width: 600px;
+     text-align: center;
+}
