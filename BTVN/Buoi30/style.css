@@ -1,0 +1,139 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body {
+     font-family: Arial, sans-serif;
+     width: 1000px;
+     margin: 20px auto;
+     background-color: #c8d6e5;
+     color: #4b5563;
+}
+h1 {
+     color: #4b5563;
+     margin-bottom: 20px;
+     font-family: "Croissant One", cursive;
+}
+.toolbar {
+     background-color: #9b59b6;
+     padding: 10px;
+     border-radius: 5px;
+     margin-bottom: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+}
+.toolbar-left {
+     background-color: #ffffff;
+     border: 1px solid #d1d5db;
+     color: #4b5563;
+     padding: 8px 15px;
+     font-size: 16px;
+     border-radius: 5px;
+     cursor: pointer;
+}
+.toolbar-right {
+     display: flex;
+     align-items: center;
+}
+button {
+     background-color: #ffffff;
+     border: 1px solid #d1d5db;
+     color: #4b5563;
+     padding: 8px 15px;
+     margin-right: 10px;
+     font-size: 15px;
+     transition: background-color 0.2s;
+     border-radius: 5px;
+     outline: none;
+     cursor: pointer;
+}
+
+button:hover {
+     background-color: #e5e7eb;
+}
+
+button:active {
+     background-color: #d1d5db;
+}
+#color-btn {
+     width: 35px;
+     height: 35px;
+     border-radius: 5px;
+     outline: none;
+     border: 0;
+     cursor: pointer;
+}
+.container {
+     margin: 20px auto;
+     padding: 10px;
+     transition: .4s ease-in-out;
+}
+#editor {
+     width: 100%;
+     min-height: 300px;
+     padding: 10px;
+     border-radius: 5px;
+     overflow-y: auto;
+     background-color: #fff;
+     border: 1px solid #8e44ad;
+     outline: none;
+}
+
+#editor:focus {
+     box-shadow: 0 0 0 0.5px #8e44ad;
+}
+#file-name {
+     outline: 0;
+     border: 0;
+     padding: 13px;
+     border-radius: 5px;
+     font-size: 15px;
+     color: #4b5563;
+}
+.btn {
+     margin-top: 20px;
+     padding: 12px 16px;
+     border: 0;
+     background-color: #8e44ad;
+     color: #fff;
+}
+.btn:hover {
+     background-color: #8e44ad;
+     opacity: 0.9;
+}
+.word-count {
+     margin-top: 20px;
+     font-size: 15px;
+     color: #4b5563;
+     float: right;
+     line-height: 44px;
+}
+
+i.rotate {
+     rotate: 360deg;
+     transition: 0.4s linear;
+}
+i.rotate-reverse {
+     rotate: -360deg;
+     transition: 0.4s linear;
+}
+body.dark-mode {
+     background-color: #121212;
+     color: #ffffff;
+}
+.toolbar.dark-mode,
+.container.dark-mode {
+     background-color: #333333;
+}
+#editor.dark-mode {
+     background-color: #1f1f1f;
+     border-color: #333333;
+}
+.black {
+     color: #4b5563;
+}
+.white {
+     color: #fff;
+}

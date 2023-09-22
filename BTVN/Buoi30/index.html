@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Doc Editor</title>
+          <!-- Icon -->
+          <link
+               rel="stylesheet"
+               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+               crossorigin="anonymous"
+               referrerpolicy="no-referrer" />
+          <!-- Font -->
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Roboto&display=swap"
+               rel="stylesheet" />
+          <!-- Style -->
+          <link rel="stylesheet" href="./style.css" />
+     </head>
+     <body>
+          <h1 class="heading">DOC Editor</h1>
+          <div class="toolbar">
+               <div class="toolbar-left"><i class="fa-solid fa-gear"></i></div>
+               <div class="toolbar-right">
+                    <button onclick="execCmd('undo')"><i class="fas fa-undo"></i></button>
+                    <button onclick="execCmd('redo')"><i class="fas fa-redo"></i></button>
+                    <button onclick="execCmd('bold')"><b>b</b></button>
+                    <button onclick="execCmd('italic')"><u>u</u></button>
+                    <button onclick="execCmd('underline')"><i>i</i></button>
+                    <input type="color" id="color-btn" />
+               </div>
+          </div>
+          <div class="container">
+               <div id="editor" contenteditable="true"></div>
+               <button onclick="resetEditor()" class="btn">New</button>
+               <button onclick="saveDoc()" class="btn">Save DOC</button>
+               <button onclick="exportToPDF()" class="btn">Export to PDF</button>
+               <input type="text" placeholder="File name PDF" id="file-name" />
+               <div class="word-count">
+                    Số ký tự: <span id="charCount">0</span> | Số từ: <span id="wordCount">0</span>
+               </div>
+          </div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+          <script src="./app.js"></script>
+     </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Get Link Demo</title>
+     </head>
+     <body>
+          <p>Time remaining: <span id="timer">10</span> seconds</p>
+          <button id="getLinkButton" disabled>Get Link</button>
+
+          <script>
+               let timeRemaining = 10;
+               let isPaused = false;
+               const timerElement = document.getElementById("timer");
+               const button = document.getElementById("getLinkButton");
+
+               let lastUpdateTime = Date.now();
+
+               function updateCounter() {
+                    const currentTime = Date.now();
+                    const elapsedTime = currentTime - lastUpdateTime;
+
+                    if (elapsedTime >= 1000) {
+                         // One second has passed
+                         timeRemaining--;
+                         timerElement.innerText = timeRemaining;
+                         lastUpdateTime = currentTime;
+
+                         if (timeRemaining <= 0) {
+                              button.disabled = false;
+                              return; // This will stop the updateCounter from being called again
+                         }
+                    }
+
+                    if (!isPaused && timeRemaining > 0) {
+                         requestAnimationFrame(updateCounter);
+                    }
+               }
+
+               document.addEventListener("visibilitychange", () => {
+                    if (document.hidden) {
+                         isPaused = true;
+                    } else {
+                         isPaused = false;
+                         if (timeRemaining > 0) {
+                              requestAnimationFrame(updateCounter);
+                         }
+                    }
+               });
+
+               button.addEventListener("click", () => {
+                    window.location.href = "https://fullstack-nodejs.fullstack.edu.vn/";
+               });
+
+               window.onkeydown = (event) => {
+                    if (event.keyCode === 123) {
+                         // F12
+                         event.preventDefault();
+                         return false;
+                    }
+               };
+
+               // Start the counter
+               requestAnimationFrame(updateCounter);
+          </script>
+     </body>
+</html>
