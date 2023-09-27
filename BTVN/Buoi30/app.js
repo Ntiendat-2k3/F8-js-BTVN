@@ -1,5 +1,6 @@
 function execCmd(commandName) {
      document.execCommand(commandName, false, null);
+     // 
 }
 /// Reset
 function resetEditor() {
@@ -29,7 +30,7 @@ function exportToPDF() {
           fileNameInput.focus();
           return;
      } else {
-          fileNameInput.style.border = ""; 
+          fileNameInput.style.border = "";
      }
 
      var opt = {
@@ -40,6 +41,7 @@ function exportToPDF() {
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
      };
      html2pdf().from(content).set(opt).save();
+     fileNameInput.value = "";
 }
 
 /// Count words
@@ -50,6 +52,7 @@ function countWordsAndChars() {
      var content = document.getElementById("editor").innerText;
      var charCount = content.length;
      var wordCount = content.split(/\s+/).filter(function (word) {
+          // /\s+/ : một hoặc nhiều kí tự khoảng trắng
           return word.length > 0;
      }).length;
 
@@ -66,7 +69,7 @@ document.getElementById("color-btn").addEventListener("input", function (e) {
      execCmdWithArg("foreColor", color);
 });
 
-/// Theme
+/// Dark-Theme
 let isDarkMode = false;
 let isRotate = false;
 document.querySelector(".toolbar-left").addEventListener("click", function () {
@@ -97,7 +100,7 @@ function toggleDarkTheme() {
           container.classList.remove("dark-mode");
           editor.classList.remove("dark-mode");
           wordCount.style.color = "#4b5563";
-          heading.style.color = "#4b5563";
+          heading.classList.remove("dark-mode");
 
           isDarkMode = false;
      } else {
@@ -106,7 +109,8 @@ function toggleDarkTheme() {
           container.classList.add("dark-mode");
           editor.classList.add("dark-mode");
           wordCount.style.color = "#fff";
-          heading.style.color = "#fff";
+          heading.classList.add("dark-mode");
+
           isDarkMode = true;
      }
 }
@@ -125,13 +129,14 @@ function zoomOut() {
           document.getElementById("editor").style.fontSize = currentFontSize + "px";
      }
 }
+
 document.addEventListener("keydown", function (e) {
      if (e.ctrlKey) {
           switch (e.key) {
                case "+":
                case "=":
                     zoomIn();
-                    e.preventDefault();
+                    e.preventDefault(); 
                     break;
                case "-":
                     zoomOut();
