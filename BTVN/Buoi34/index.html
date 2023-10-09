@@ -11,31 +11,35 @@
                integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
                crossorigin="anonymous"
                referrerpolicy="no-referrer" />
-          <link rel="stylesheet" href="./style.css" />
+          <link rel="stylesheet" href="./assets/style.css" />
      </head>
      <body>
-          <div id="root">
-               <div class="container">
-                    <h1 class="title">
-                         <span class="text-gradient">Smatyx</span>
-                         <span>Todos App</span>
-                    </h1>
-
-                    <div class="search-add-todo-container">
-                         <div class="container-inner">
-                              <div class="search-wrap">
-                                   <input type="search" placeholder="Search Todos" value />
-                                   <button type="button">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                   </button>
-                              </div>
-                              <button type="button" class="add-todos">Add Todos</button>
+          <main class="main">
+               <h1 class="title"><span class="title-highlight">Smatyx</span> Todos App</h1>
+               <div class="action-bar">
+                    <div class="search-container">
+                         <input type="text" class="search-input" placeholder="Search todos" />
+                         <button class="search-btn">
+                              <i class="fa-solid fa-magnifying-glass"></i>
+                         </button>
+                    </div>
+                    <button class="add-todo-btn">Add todos</button>
+               </div>
+               <div class="task-list"></div>
+               <div class="task-list-completed"></div>
+               <div class="add-todo-popup hide">
+                    <div class="add-todo-wrapper">
+                         <input type="text" class="add-input" placeholder="Add todos" />
+                         <hr />
+                         <div class="action-container">
+                              <button class="save-btn">Save</button>
+                              <button class="cancel-btn">Cancel</button>
                          </div>
                     </div>
-                    
                </div>
-          </div>
+          </main>
 
-          <script type="module" src="./app.js"></script>
+          <script type="module" src="./assets/render.js"></script>
+          <script type="module" src="./assets/events.js"></script>
      </body>
 </html>

@@ -1,0 +1,176 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+     font-family: inherit;
+     outline: none;
+     border: none;
+     background: transparent;
+}
+
+button {
+     cursor: pointer;
+}
+
+.title {
+     text-align: center;
+     margin-bottom: 30px;
+}
+
+.title-highlight {
+     background-color: #00dbde;
+     background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+}
+
+.action-bar {
+     display: flex;
+     align-items: center;
+}
+
+.search-container {
+     position: relative;
+}
+
+.add-input,
+.search-input {
+     width: 500px;
+     border: 1px solid #c7c7c7;
+     padding: 0 15px;
+     height: 55px;
+     border-radius: 10px;
+     font-size: 18px;
+}
+
+.add-input:placeholder-shown,
+.search-input:placeholder-shown {
+     color: #c7c7c7;
+}
+
+.search-btn,
+.remove-btn,
+.edit-btn,
+.complete-btn {
+     width: 40px;
+     height: 40px;
+     border-radius: 10px;
+     color: #fff;
+}
+
+.search-btn {
+     position: absolute;
+     right: 10px;
+     top: 50%;
+     transform: translateY(-50%);
+     background: #1d4ed8;
+     color: #fff;
+}
+
+.edit-btn {
+     background: #1d4ed8;
+}
+
+.remove-btn {
+     background: #be123c;
+}
+
+.complete-btn {
+     background: #9ca3af;
+     font-size: 17px;
+}
+
+.show-task-completed,
+.cancel-btn,
+.save-btn,
+.add-todo-btn {
+     padding: 10px 20px;
+     font-size: 18px;
+     color: #fff;
+     border-radius: 10px;
+     margin-left: 10px;
+     font-weight: 500;
+}
+
+.add-todo-btn {
+     background: #047857;
+}
+
+.save-btn {
+     background: #047857;
+}
+
+.task-item {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     background: #fff;
+     border-radius: 10px;
+     height: 60px;
+     padding: 0 15px;
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+     margin-top: 15px;
+}
+
+.add-todo-popup {
+     position: fixed;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     inset: 0;
+     background-color: #99999980;
+     transition-property: opacity, visibility;
+     transition-duration: 0.3s;
+}
+
+.add-todo-wrapper {
+     background-color: #fff;
+     border-radius: 10px;
+     padding: 25px;
+}
+
+.action-container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-top: 20px;
+}
+
+.add-input {
+     margin-bottom: 30px;
+}
+
+.cancel-btn {
+     color: #999;
+     border: 1px solid #afafaf;
+}
+
+.hide {
+     opacity: 0;
+     visibility: hidden;
+}
+
+.task-list-completed .complete-btn {
+     color: #fff;
+     background-color: #047857;
+}
+
+.show-task-completed {
+     background: #9ca3af;
+     margin-left: 0;
+     margin-top: 20px;
+}
