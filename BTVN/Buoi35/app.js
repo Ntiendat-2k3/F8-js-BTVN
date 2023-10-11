@@ -1,17 +1,15 @@
 // let page = 1;
 // const limit = 10;
-let isLoading = false; // Biến trạng thái kiểm tra xem liệu chúng ta có đang tải dữ liệu hay không
+let isLoading = false; 
 
 function fetchPosts() {
      if (isLoading) {
-          return; // Nếu đang tải dữ liệu, không thực hiện bất kỳ yêu cầu nào
+          return; 
      }
 
-     isLoading = true; // Đặt trạng thái đang tải dữ liệu
-     // Hiển thị trạng thái đang tải
+     isLoading = true; 
      document.getElementById("loading").style.display = "block";
 
-     // Chờ 1.5 giây trước khi gọi API
      setTimeout(() => {
           fetch(`https://cvsy7f-8080.csb.app/blog`)
                .then((response) => {
@@ -21,9 +19,8 @@ function fetchPosts() {
                     return response.json();
                })
                .then((data) => {
-                    // Ẩn trạng thái đang tải
                     document.getElementById("loading").style.display = "none";
-                    isLoading = false; // Đặt trạng thái không tải dữ liệu
+                    isLoading = false; 
 
                     // Nếu không có dữ liệu trả về (đã đọc hết bài viết), bắt đầu lại từ trang đầu tiên
                     if (data.length === 0) {
