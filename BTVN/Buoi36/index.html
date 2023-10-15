@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Quiz Game</title>
+          <link rel="stylesheet" href="./style.css" />
+     </head>
+     <body>
+          <button onclick="startGame()" id="start-button">Start</button>
+          <div class="question-container" id="question-container"></div>
+          <button onclick="checkAnswer()" id="choose-button" style="display: none">Choose</button>
+          <button onclick="nextQuestion()" id="next-button" style="display: none">Next</button>
+          <button onclick="resetGame()" id="reset-button" style="display: none">Chơi lại</button>
+          <div id="feedback" style="margin-top: 20px"></div>
+          <div id="score-display">Điểm số: 0</div>
+
+          <script src="./app.js"></script>
+     </body>
+</html>

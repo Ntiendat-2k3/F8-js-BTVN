@@ -1,0 +1,52 @@
+[
+     {
+          "question": "What is the capital of France?",
+          "options": {
+               "A": "London",
+               "B": "Madrid",
+               "C": "Paris",
+               "D": "Rome"
+          },
+          "answer": "C"
+     },
+     {
+          "question": "Which planet is known as the Red Planet?",
+          "options": {
+               "A": "Earth",
+               "B": "Mars",
+               "C": "Jupiter",
+               "D": "Venus"
+          },
+          "answer": "B"
+     },
+     {
+          "question": "What is the synonym of 'happy'?",
+          "options": {
+               "A": "sad",
+               "B": "joyous",
+               "C": "tired",
+               "D": "anxious"
+          },
+          "answer": "B"
+     },
+     {
+          "question": "What does 'give up' mean?",
+          "options": {
+               "A": " to offer",
+               "B": "to store something",
+               "C": "to surrender or quit",
+               "D": "to present as a gift"
+          },
+          "answer": "C"
+     },
+     {
+          "question": "What does the idiom 'bite the bullet' mean?",
+          "options": {
+               "A": "to actually bite a bullet",
+               "B": " to avoid a problem",
+               "C": "to face a difficult situation",
+               "D": "to eat something quickly"
+          },
+          "answer": "C"
+     }
+]

@@ -112,3 +112,35 @@ getA()
      .then((data) => {
           console.log(data);
      });
+
+// Async Await
+// Async function luôn trả về 1 promise
+const getUser2 = async () => {
+     return "Hoang An";
+};
+console.log(getUser2()); // => trả về 1 promise => muốn hiện thị Hoang An phải ".then"
+getUser2().then((data) => {
+     console.log(data); // Hoang An
+});
+
+// kết hợp async await để đọc thẳng k cần .then
+const getUser_2 = () => {
+     return new Promise((resolve, reject) => {
+          setTimeout(() => {
+               // resolve("Hoang An");
+               reject("Error");
+          }, 1000);
+     });
+};
+// try catch trong promise
+const showUser = async () => {
+     try {
+          const data = await getUser_2();
+          console.log(data);
+     } catch (e) {
+          console.log(e);
+     } finally {
+          console.log("Completed");
+     }
+};
+showUser();

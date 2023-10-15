@@ -4,6 +4,8 @@
 // https://cvsy7f-8080.csb.app/posts
 
 import { client } from "./client.js";
+import { config } from "./conjig.js";
+const { PAGE_LIMIT } = config;
 
 //  <div class="row g-3">
 //       <div class="col-6 col-lg-4">
@@ -100,12 +102,57 @@ const render = (posts) => {
           .join("");
      postEl.innerHTML = `<div class="row g-3">${postHtml}</div>`;
 };
+const paginationNav = document.querySelector(".pagination-nav");
+const renderPaginate = (totalPages) => {
+     paginationNav.innerText = "";
+     if (totalPages > 1) {
+          paginationNav.innerHTML = `
+               <ul class="pagination">
+                    ${
+                         currentPage > 1
+                              ? `<li class="page-item"><a class="page-link page-prev" href="#">Trước</a></li>`
+                              : ""
+                    }
+                    ${[...Array(totalPages).keys()]
+                         .map(
+                              (index) =>
+                                   `<li class="page-item ${
+                                        +currentPage === +index + 1 ? "active" : ""
+                                   }"><a class="page-link page-number" href="#">${
+                                        index + 1
+                                   }</a></li>`
+                         )
+                         .join("")}
+                    ${
+                         currentPage < totalPages
+                              ? `<li class="page-item"><a class="page-link page-next" href="#">Sau</a></li>`
+                              : ""
+                    }
+               </ul>`;
+     }
+};
+const goPage = (page) => {
+     currentPage = page;
+     getPosts({
+          _sort: sort,
+          _order: order,
+          q: keyword,
+          _page: currentPage,
+          _limit: PAGE_LIMIT,
+     });
+};
 const getPosts = async (query = {}) => {
      const queryString = new URLSearchParams(query).toString();
-     const { data: posts } = await client.get("/posts?" + queryString);
+     const { data: posts, response } = await client.get("/posts?" + queryString);
      // console.log(queryString);
      // console.log(posts);
+
+     // Tính tổng số trang
+     const totalPosts = response.headers.get("x-total-count");
+     console.log(totalPosts);
+     const totalPages = Math.ceil(totalPosts / PAGE_LIMIT);
      render(posts);
+     renderPaginate(totalPages);
 };
 getPosts({
      _sort: "id",
@@ -115,20 +162,29 @@ getPosts({
 let order = "desc";
 let sort = "id";
 let keyword = "";
+let currentPage = 2;
 getPosts({
      _sort: sort,
      _order: order,
+     _page: currentPage,
+     _limit: PAGE_LIMIT,
 });
+// Phân trang
+// Tổng số trang = Tổng số bài / limit
+
 /// Chức năng tìm kiếm
 const searchForm = document.querySelector(".search");
 searchForm.addEventListener("submit", function (e) {
      e.preventDefault();
      const keywordEl = e.target.querySelector(".keyword");
-     const keyword = keywordEl.value;
+     keyword = keywordEl.value;
+
      getPosts({
           _sort: sort,
           _order: order,
           q: keyword,
+          _page: currentPage,
+          _limit: PAGE_LIMIT,
      });
      console.log(keyword);
      keywordEl.value = "";
@@ -137,9 +193,29 @@ searchForm.addEventListener("submit", function (e) {
 /// Chức năng sắp xếp
 const sortByEl = document.querySelector(".sort-by");
 sortByEl.addEventListener("change", function (e) {
-     const type = e.target.value;
+     order = e.target.value;
      getPosts({
-          _sort: "id",
-          _order: type,
+          _sort: sort,
+          _order: order,
+          q: keyword,
+          _page: currentPage,
+          _limit: PAGE_LIMIT,
      });
+});
+
+/// Xử lý chuyển trang
+paginationNav.addEventListener("click", (e) => {
+     e.preventDefault();
+     if (e.target.classList.contains("page-number")) {
+          // goi ham
+          goPage(+e.target.innerText);
+     }
+     // prev
+     if (e.target.classList.contains("page-prev")) {
+          goPage(currentPage - 1);
+     }
+     // next
+     if (e.target.classList.contains("page-next")) {
+          goPage(currentPage + 1);
+     }
 });

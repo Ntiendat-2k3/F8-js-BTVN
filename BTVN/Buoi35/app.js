@@ -1,13 +1,13 @@
 // let page = 1;
 // const limit = 10;
-let isLoading = false; 
+let isLoading = false;
 
 function fetchPosts() {
      if (isLoading) {
-          return; 
+          return;
      }
 
-     isLoading = true; 
+     isLoading = true;
      document.getElementById("loading").style.display = "block";
 
      setTimeout(() => {
@@ -19,28 +19,29 @@ function fetchPosts() {
                     return response.json();
                })
                .then((data) => {
+                    console.log(data);
                     document.getElementById("loading").style.display = "none";
-                    isLoading = false; 
+                    isLoading = false;
 
                     // Nếu không có dữ liệu trả về (đã đọc hết bài viết), bắt đầu lại từ trang đầu tiên
                     if (data.length === 0) {
-                         page = 1;
+                         // page = 1;
                          fetchPosts();
                          return;
                     }
 
                     data.forEach((post) => {
                          const postElement = `
-                         <div class="post">
-                              <h2>${post.title}</h2>
-                              <p>${post.content}</p>
-                              <div><img src="${post.image}" alt="image" /></div>
-                              <span>By: ${post.author}</span>
-                         </div>
+                              <div class="post">
+                                   <h2>${post.title}</h2>
+                                   <p>${post.content}</p>
+                                   <div><img src="${post.image}" alt="image" /></div>
+                                   <span>By: ${post.author}</span>
+                              </div>
                     `;
                          document.getElementById("post-list").innerHTML += postElement;
                     });
-                    page++;
+                    // page++;
                })
                .catch((error) => {
                     // Ẩn trạng thái đang tải nếu có lỗi
