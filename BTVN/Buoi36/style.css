@@ -44,13 +44,12 @@ button:focus {
      margin-top: 20px;
 }
 
-label {
-     display: block;
-     margin-bottom: 10px;
-}
 
 input[type="radio"] {
      margin-right: 10px;
+}
+input:checked {
+     background-color: #3498db;
 }
 @keyframes blink {
      0% {
@@ -68,6 +67,23 @@ input[type="radio"] {
      color: #0984e3;
      background-color: #d4edda;
      border: 1px solid #c3e6cb;
-     padding: 5px;
+     padding: 10px;
      border-radius: 5px;
-} 
+}
+
+.hidden-checkbox {
+     display: none;
+}
+
+label {
+     display: block;
+     cursor: pointer;
+     padding: 10px;
+     border-radius: 3px;
+     border: 1px solid #ddd;
+}
+label input[type="checkbox"]:disabled + span {
+     color: #aaa; 
+     cursor: not-allowed; /* Hiển thị con trỏ là không cho phép */
+}
+
