@@ -45,6 +45,7 @@ Promise.all(request).then((users) => {
      console.log(salary);
 });
 
+
 const promise = Promise.resolve("F8");
 promise.then((data) => {
      console.log(data);

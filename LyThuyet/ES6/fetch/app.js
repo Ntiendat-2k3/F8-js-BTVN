@@ -4,7 +4,7 @@
 // https://cvsy7f-8080.csb.app/posts
 
 import { client } from "./client.js";
-import { config } from "./conjig.js";
+import { config } from "./config.js";
 const { PAGE_LIMIT } = config;
 
 //  <div class="row g-3">

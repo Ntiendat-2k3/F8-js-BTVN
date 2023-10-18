@@ -4,7 +4,14 @@ let score = 0;
 let answered = false;
 let countdown = 5;
 let timerInterval;
+let gameEnded = false;
 
+function shuffleArray(array) {
+     for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]]; // swap elements
+     }
+}
 
 function startGame() {
      document.getElementById("start-button").style.display = "none";
@@ -14,6 +21,7 @@ function startGame() {
           .then((response) => response.json())
           .then((quizData) => {
                data = quizData;
+               shuffleArray(data); // xáo trộn danh sách câu hỏi
                renderQuestion(currentQuestionIndex);
           })
           .catch((error) => {
@@ -24,13 +32,20 @@ function startGame() {
 function renderQuestion(index) {
      const questionData = data[index];
      if (!questionData) {
+          gameEnded = true; // Cập nhật trạng thái trò chơi
+
           document.getElementById(
                "question-container"
           ).innerHTML = `Quiz Finished! Tổng điểm của bạn là: ${score}`;
           document.getElementById("choose-button").style.display = "none";
+          document.getElementById("next-button").style.display = "none";
           document.getElementById("reset-button").style.display = "block";
+
+          resetTimer(); // Dừng đồng hồ đếm ngược
           return;
      }
+
+     gameEnded = false;
 
      let optionsHTML = "";
      for (let option in questionData.options) {
@@ -53,6 +68,7 @@ function renderQuestion(index) {
      resetTimer(); // Đặt lại đồng hồ
      startTimer(); // Bắt đầu đếm ngược
 }
+
 function disableCheckboxes(correctAnswers) {
      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
@@ -64,7 +80,6 @@ function disableCheckboxes(correctAnswers) {
      });
 }
 
-
 function checkAnswer() {
      const selectedOptions = document.querySelectorAll('input[name="option"]:checked');
 
@@ -72,7 +87,7 @@ function checkAnswer() {
           alert("Vui lòng chọn ít nhất một câu trả lời!");
           return;
      }
-     
+
      let isCorrect = true;
      const correctAnswers = data[currentQuestionIndex].answer;
      selectedOptions.forEach((option) => {
@@ -81,30 +96,35 @@ function checkAnswer() {
           }
      });
 
+     const feedbackElement = document.getElementById("feedback");
      if (isCorrect && correctAnswers.length === selectedOptions.length) {
-          document.getElementById("feedback").textContent =
-               "Chính xác! Chúc mừng bạn được 200 điểm";
+          feedbackElement.textContent = "Chính xác! Chúc mừng bạn được 200 điểm";
+          feedbackElement.classList.remove("wrong-feedback");
+          feedbackElement.classList.add("correct-feedback");
           score += 200;
           document.getElementById("score-display").textContent = `Điểm số: ${score}`;
      } else {
-          document.getElementById("feedback").textContent = "Đáp án chưa chính xác";
+          feedbackElement.textContent = "Đáp án chưa chính xác";
+          feedbackElement.classList.remove("correct-feedback");
+          feedbackElement.classList.add("wrong-feedback");
 
           // Highlight the correct answers
-          console.log(correctAnswers);
           [...correctAnswers].forEach((correctOption) => {
                const correctElem = document.querySelector(
                     `input[name="option"][value="${correctOption}"]`
                ).parentNode;
                correctElem.classList.add("highlight-correct");
           });
-
      }
+
+     feedbackElement.style.display = "block";
 
      document.getElementById("choose-button").style.display = "none";
      document.getElementById("next-button").style.display = "block";
-     disableCheckboxes(correctAnswers); 
+     disableCheckboxes(correctAnswers);
      resetTimer();
 }
+
 
 function nextQuestion() {
      currentQuestionIndex++;
@@ -115,6 +135,7 @@ function nextQuestion() {
      resetTimer();
      startTimer();
 }
+
 function toggleCheckbox(event) {
      if (event.currentTarget.querySelector('input[type="checkbox"]').disabled) return;
      const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
@@ -126,6 +147,7 @@ function toggleCheckbox(event) {
           event.currentTarget.style.backgroundColor = "transparent";
      }
 }
+
 function startTimer() {
      document.getElementById("timer").textContent = `Thời gian: ${countdown}s`;
      timerInterval = setInterval(function () {
@@ -142,6 +164,7 @@ function resetTimer() {
      clearInterval(timerInterval);
      countdown = 5;
 }
+
 function handleTimesUp() {
      alert("Hết giờ!");
      checkAnswer();

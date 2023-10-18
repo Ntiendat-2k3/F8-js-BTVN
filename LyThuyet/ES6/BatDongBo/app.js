@@ -118,7 +118,7 @@ getA()
 const getUser2 = async () => {
      return "Hoang An";
 };
-console.log(getUser2()); // => trả về 1 promise => muốn hiện thị Hoang An phải ".then"
+console.log(getUser2()); /// => trả về 1 promise => muốn hiện thị Hoang An phải ".then"
 getUser2().then((data) => {
      console.log(data); // Hoang An
 });

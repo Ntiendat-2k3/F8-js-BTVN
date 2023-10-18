@@ -86,4 +86,32 @@ label input[type="checkbox"]:disabled + span {
      color: #aaa; 
      cursor: not-allowed; /* Hiển thị con trỏ là không cho phép */
 }
+#choose-button,
+#next-button,
+#reset-button {
+     display: none;
+}
+/* CSS cho thông báo đáp án chính xác */
+#feedback {
+     margin-top: 20px;
+     font-weight: bold;
+     padding: 10px;
+     border-radius: 5px;
+     max-width: 500px;
+     width: 100%;
+     text-align: center;
+     display: none; /* Ẩn thông báo ban đầu */
+}
+
+.correct-feedback {
+     background-color: #4CAF50; /* Màu xanh lá cây */
+     color: white;
+     border: 1px solid #45a049;
+}
+
+.wrong-feedback {
+     background-color: #f44336; /* Màu đỏ */
+     color: white;
+     border: 1px solid #d32f2f;
+}
 
