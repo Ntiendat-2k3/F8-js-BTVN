@@ -43,6 +43,7 @@ class QuizGame {
                .catch((error) => {
                     console.error("Error fetching data:", error);
                });
+               
      }
 
      renderQuestion(index) {
