@@ -74,9 +74,7 @@ const fetchData = async () => {
                const timeDifference = today.getTime() - date.getTime();
                const timeUp = changeTime(timeDifference, true); // Sử dụng hàm changeTime đã được định nghĩa trước đó
 
-               const dateString = `${date.getDate()} - ${
-                    date.getMonth() + 1
-               } - ${date.getFullYear()}`;
+               const dateString = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
                const HoursString = `${date.getHours()} giờ ${
                     date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
                } phút`;
@@ -136,11 +134,10 @@ const renderDefault = () => {
 };
 
 const renderForm = (type = "login") => {
-     const renderForm = (type = "login") => {
-          const root = document.querySelector("#root");
+     const root = document.querySelector("#root");
 
-          if (type === "login") {
-               root.innerHTML = `
+     if (type === "login") {
+          root.innerHTML = `
                     <div class="container py-3">
                          <div class="row justify-content-center">
                               <div class="col-7">
@@ -174,13 +171,13 @@ const renderForm = (type = "login") => {
                          </div>
                     </div>`;
 
-               const registerBtn = document.querySelector(".register-button");
-               registerBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    renderForm("register");
-               });
-          } else if (type === "register") {
-               root.innerHTML = `
+          const registerBtn = document.querySelector(".register-button");
+          registerBtn.addEventListener("click", function (e) {
+               e.preventDefault();
+               renderForm("register");
+          });
+     } else if (type === "register") {
+          root.innerHTML = `
                     <div class="container py-3">
                          <div class="row justify-content-center">
                               <div class="col-7">
@@ -222,14 +219,13 @@ const renderForm = (type = "login") => {
                          </div>
                     </div>`;
 
-               // Attach event listeners specific to the registration form
-               const loginBtn = document.querySelector(".login-button");
-               loginBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    renderForm("login");
-               });
-          }
-     };
+          // Attach event listeners specific to the registration form
+          const loginBtn = document.querySelector(".login-button");
+          loginBtn.addEventListener("click", function (e) {
+               e.preventDefault();
+               renderForm("login");
+          });
+     }
 };
 
 // App logic

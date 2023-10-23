@@ -54,7 +54,14 @@ h2 {
      font-family: 'Love Ya Like A Sister', cursive;
      font-size: 35px;
 } */
-
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body {
+     padding: 20px;
+}
 #loading {
      text-align: center;
      padding: 20px 0;
@@ -64,4 +71,7 @@ h2 {
 .wrapper {
      display: flex;
      justify-content: space-between;
+}
+h1 {
+     margin: 0 auto;
 }
