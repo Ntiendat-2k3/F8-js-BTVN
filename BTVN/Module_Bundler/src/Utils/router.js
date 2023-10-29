@@ -4,7 +4,7 @@ import { Error } from "../Error";
 function displayContentInLayout(Layout, content) {
      const app = document.getElementById("app");
      if (!app) {
-          console.error(`Element with ID ${APP_ELEMENT_ID} not found!`);
+          console.error(`Not found!`);
           return;
      }
      app.innerHTML = Layout({ body: content });
