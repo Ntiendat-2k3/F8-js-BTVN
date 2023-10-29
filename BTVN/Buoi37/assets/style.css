@@ -62,6 +62,9 @@ h2 {
 body {
      padding: 20px;
 }
+#root {
+     overflow: hidden;
+}
 #loading {
      text-align: center;
      padding: 20px 0;

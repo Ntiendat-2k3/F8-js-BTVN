@@ -75,18 +75,27 @@ const fetchData = async () => {
      }
 };
 
+window.addEventListener("scroll", () => {
+     if (isFetching || !hasMore) return;
+     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
+          console.log("Fetching more data...");
+          fetchData();
+     }
+});
 const app = {
      render: function () {
           const root = document.querySelector("#root");
           if (this.isLogin()) {
                root.innerHTML = `
-                    <h1>Xin chào, [Tên người dùng]!</h1>
                     <button type="submit" class="btn btn-primary" id="logoutBtn">Đăng xuất</button>
+                    <div class="postFormContainer"></div>
                     <div class="block-list"></div>
                `;
 
                const logoutBtn = document.getElementById("logoutBtn");
                logoutBtn.addEventListener("click", this.handleLogout.bind(this));
+
+               this.renderPostForm();
           } else {
                root.innerHTML = `
                     <div class="wrapper">
@@ -100,20 +109,111 @@ const app = {
                fetchData();
 
                const btn = root.querySelector("button");
-               btn.addEventListener("click", this.handleLogin.bind(this));
+               btn.addEventListener("click", () => {
+                    this.renderForm("login");
+               });
           }
-
-          // Global scroll event listener
-          window.addEventListener("scroll", () => {
-               if (isFetching || !hasMore) return;
-               if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-                    fetchData();
-               }
-          });
      },
 
      isLogin: function () {
           return localStorage.getItem("login_tokens") !== null;
+     },
+
+     renderForm: function (type = "login") {
+          const self = this;
+          const root = document.querySelector("#root");
+          if (type === "login") {
+               root.innerHTML = `
+               <div class="container py-3">
+                    <div class="row justify-content-center">
+                         <div class="col-7">
+                         <form class="login">
+                              <div class="mb-3">
+                                   <label for="">Email</label>
+                                   <input
+                                        type="email"
+                                        class="form-control email"
+                                        placeholder="Email..."
+                                   />
+                                   </div>
+                                   <div class="mb-3">
+                                   <label for="">Mật khẩu</label>
+                                   <input
+                                        type="password"
+                                        class="form-control password"
+                                        placeholder="Mật khẩu..."
+                                   />
+                                   </div>
+                                   <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                                   </div>
+                         </form>
+                         <div class ="msg text-danger"></div>
+                         <div>
+                              <span>Tạo tài khoản?</span> <a class="register-button" href="#!">Đăng Ký</a>
+                         </div>
+                         <a class="default" href="#!">Quay lại trang chủ</a>
+                         </div>
+                    </div>
+               </div>`;
+
+               // Attach event listeners specific to the login form
+               const registerBtn = document.querySelector(".register-button");
+               registerBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    self.renderForm("register");
+               });
+          } else if (type === "register") {
+               root.innerHTML = `
+               <div class="container py-3">
+                    <div class="row justify-content-center">
+                         <div class="col-7">
+                         <form class="register">
+                              <div class="mb-3">
+                                   <label for="">Tên</label>
+                                   <input
+                                   type="text"
+                                   class="form-control name"
+                                   placeholder="Name..."
+                                   />
+                              </div>
+                                   <div class="mb-3">
+                                   <label for="">Email</label>
+                                   <input
+                                        type="email"
+                                        class="form-control email"
+                                        placeholder="Email..."
+                                   />
+                                   </div>
+                                   <div class="mb-3">
+                                   <label for="">Mật khẩu</label>
+                                   <input
+                                        type="password"
+                                        class="form-control password"
+                                        placeholder="Mật khẩu..."
+                                   />
+                                   </div>
+                                   <div class="d-grid">
+                                   <button type="submit" class="btn btn-primary">Đăng kí</button>
+                                   </div>
+                         </form>
+                         <div class ="msg text-danger"></div>
+                         <div>
+                              <span>Bạn đã có tài khoản?</span> <a class="login-button" href="#!">Đăng nhập</a>
+                         </div>
+                         <a class="default" href="#!">Quay lại trang chủ</a>
+                         </div>
+                    </div>
+               </div>`;
+
+               // Attach event listeners specific to the registration form
+               const loginBtn = document.querySelector(".login-button");
+               loginBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    self.renderForm("login");
+               });
+          }
+          self.initEventListeners();
      },
 
      handleLogin: async function () {
@@ -151,7 +251,7 @@ const app = {
      },
 
      removeLoading: function () {
-          const form = document.querySelector(".login");
+          const form = document.querySelector(".post-form");
           const btn = form.querySelector(".btn");
           btn.innerHTML = `Đăng nhập`;
           btn.disabled = false;
@@ -209,34 +309,6 @@ const app = {
                return null;
           }
      },
-     // ... (continuation of the app object)
-
-     handleLogin: async function () {
-          const form = document.querySelector(".login");
-          const msg = document.querySelector(".msg");
-
-          const emailEl = form.querySelector(".email");
-          const passwordEl = form.querySelector(".password");
-          const email = emailEl.value;
-          const password = passwordEl.value;
-
-          this.addLoading();
-
-          try {
-               const { response, data: tokens } = await client.post("/auth/login", {
-                    email,
-                    password,
-               });
-               if (!response.ok) {
-                    msg.innerText = tokens.message;
-               } else {
-                    localStorage.setItem("login_tokens", JSON.stringify(tokens));
-                    this.render();
-               }
-          } finally {
-               this.removeLoading();
-          }
-     },
 
      handleRegister: async function () {
           const form = document.querySelector(".register");
@@ -257,14 +329,19 @@ const app = {
                     email,
                     password,
                });
-               if (!response.ok) {
-                    msg.innerText = data.message;
-               } else {
+
+               if (response.ok) {
+                    localStorage.setItem("user_name", name);
                     msg.innerText = "Đăng ký thành công! Bạn có thể đăng nhập ngay bây giờ.";
                     setTimeout(() => {
-                         this.render(); // or redirect to login page
+                         this.render();
                     }, 2000);
+               } else {
+                    msg.innerText = data.message;
                }
+          } catch (error) {
+               console.error("Lỗi:", error.message);
+               msg.innerText = "Có lỗi xảy ra khi đăng ký. Vui lòng thử lại sau.";
           } finally {
                this.removeLoadingRegister();
           }
@@ -274,24 +351,120 @@ const app = {
           const token = this.getToken();
           if (!token) {
                console.error("You must be logged in to create a post.");
-               return;
+               return null;
           }
 
           client.setToken(token);
           try {
                const { response, data } = await client.post("/posts", postData);
+               console.log("API Response:", data);
                if (response.status !== 201) {
                     console.error("Failed to create post.", data);
-                    return;
+                    return null;
                }
                console.log("Post created successfully!", data);
-               return data;
+               return data; // Đảm bảo trả về dữ liệu bài viết mới từ server
           } catch (error) {
                console.error("An error occurred while creating the post.", error);
+               return null;
           }
      },
 
-     // ... (continuation of the app object)
+     renderPostForm: function () {
+          const postFormContainer = document.querySelector(".postFormContainer");
+          if (postFormContainer) {
+               postFormContainer.innerHTML = `
+                    <div class="container py-3">
+                         <div class="row justify-content-center">
+                              <div class="col-7">
+                              <form class="post-form">
+                                   <div class="mb-3">
+                                        <label for="">Tiêu đề</label>
+                                        <input type="text" class="form-control title" placeholder="Nhập tiêu đề..." />
+                                   </div>
+                                   <div class="mb-3">
+                                        <label for="">Nội dung</label>
+                                        <textarea class="form-control content" placeholder="Nhập nội dung bài viết..."></textarea>
+                                   </div>
+                                   <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Đăng bài</button>
+                                   </div>
+                              </form>
+                              <div class="msg text-success"></div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="list-posts"></div>
+               `;
+
+               const postForm = postFormContainer.querySelector(".post-form");
+               postForm.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    this.handlePostSubmit();
+               });
+          }
+          this.initEventListeners();
+     },
+
+     handlePostSubmit: async function () {
+          const form = document.querySelector(".post-form");
+          const msg = form ? form.querySelector(".msg") : null;
+
+          const titleEl = form.querySelector(".title");
+          const contentEl = form.querySelector(".content");
+          const title = titleEl.value;
+          const content = contentEl.value;
+
+          const postData = {
+               title: title,
+               content: content,
+          };
+
+          try {
+               const data = await this.handlePost(postData);
+               if (data) {
+                    this.addPostToUI(data);
+                    if (msg) {
+                         msg.innerText = "Bài viết đã được đăng thành công!";
+                    }
+                    fetchData();
+               } else {
+                    if (msg) {
+                         msg.innerText = "Có lỗi xảy ra khi đăng bài.";
+                    }
+               }
+          } catch (error) {
+               console.error("Error:", error);
+               if (msg) {
+                    msg.innerText = "Có lỗi xảy ra khi đăng bài.";
+               }
+          }
+     },
+
+     addPostToUI: function (post) {
+          const list = document.querySelector(".block-list");
+          const date = new Date(post.createdAt);
+          const timeDifference = new Date().getTime() - date.getTime();
+          const timeUp = changeTime(timeDifference);
+
+          const postHTML = `
+               <hr>
+               <div class="container">
+                    <div class="row">
+                    <div class="col-3">
+                         <div>${date.toLocaleDateString()}</div>
+                         <div>${date.toLocaleTimeString().slice(0, 5)}</div>
+                    </div>
+                    <div class="col-9">
+                         <h2>${post.userId.name}</h2>
+                         <h4>${post.title}</h4>
+                         <p>${post.content}</p>
+                         <p class="date">${timeUp} trước</p>  
+                    </div>
+                    </div>
+               </div>`;
+          list.insertAdjacentHTML("beforeend", postHTML);
+     },
 
      addLoadingRegister: function () {
           const form = document.querySelector(".register");
@@ -308,7 +481,6 @@ const app = {
      },
 
      initEventListeners: function () {
-          // Sự kiện submit form đăng nhập
           const loginForm = document.querySelector(".login");
           if (loginForm) {
                loginForm.addEventListener("submit", (e) => {
@@ -316,8 +488,14 @@ const app = {
                     this.handleLogin();
                });
           }
+          const defaultBtn = document.querySelector(".default");
+          if (defaultBtn) {
+               defaultBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    this.render();
+               });
+          }
 
-          // Sự kiện chuyển giữa form đăng nhập và đăng ký
           const registerBtn = document.querySelector(".register-button");
           const loginBtn = document.querySelector(".login-button");
           if (registerBtn) {
@@ -333,107 +511,11 @@ const app = {
                });
           }
 
-          // Sự kiện submit form đăng ký
           const registerForm = document.querySelector(".register");
           if (registerForm) {
                registerForm.addEventListener("submit", (e) => {
                     e.preventDefault();
                     this.handleRegister();
-               });
-          }
-     },
-
-     renderForm: function (type = "login") {
-          const root = document.querySelector("#root");
-          if (type === "login") {
-               root.innerHTML = `
-            <div class="container py-3">
-                 <div class="row justify-content-center">
-                      <div class="col-7">
-                      <form class="login">
-                           <div class="mb-3">
-                                <label for="">Email</label>
-                                <input
-                                     type="email"
-                                     class="form-control email"
-                                     placeholder="Email..."
-                                />
-                                </div>
-                                <div class="mb-3">
-                                <label for="">Mật khẩu</label>
-                                <input
-                                     type="password"
-                                     class="form-control password"
-                                     placeholder="Mật khẩu..."
-                                />
-                                </div>
-                                <div class="d-grid">
-                                     <button type="submit" class="btn btn-primary">Đăng nhập</button>
-                                </div>
-                      </form>
-                      <div class ="msg text-danger"></div>
-                      <div>
-                           <span>Tạo tài khoản?</span> <a class="register-button" href="#!">Đăng Ký</a>
-                      </div>
-                      <a class="default" href="#!">Quay lại trang chủ</a>
-                      </div>
-                 </div>
-            </div>`;
-
-               // Attach event listeners specific to the login form
-               const registerBtn = document.querySelector(".register-button");
-               registerBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    renderForm("register");
-               });
-          } else if (type === "register") {
-               root.innerHTML = `
-            <div class="container py-3">
-                 <div class="row justify-content-center">
-                      <div class="col-7">
-                      <form class="register">
-                           <div class="mb-3">
-                                <label for="">Tên</label>
-                                <input
-                                type="text"
-                                class="form-control name"
-                                placeholder="Name..."
-                                />
-                           </div>
-                                <div class="mb-3">
-                                <label for="">Email</label>
-                                <input
-                                     type="email"
-                                     class="form-control email"
-                                     placeholder="Email..."
-                                />
-                                </div>
-                                <div class="mb-3">
-                                <label for="">Mật khẩu</label>
-                                <input
-                                     type="password"
-                                     class="form-control password"
-                                     placeholder="Mật khẩu..."
-                                />
-                                </div>
-                                <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">Đăng kí</button>
-                                </div>
-                      </form>
-                      <div class ="msg text-danger"></div>
-                      <div>
-                           <span>Bạn đã có tài khoản?</span> <a class="login-button" href="#!">Đăng nhập</a>
-                      </div>
-                      <a class="default" href="#!">Quay lại trang chủ</a>
-                      </div>
-                 </div>
-            </div>`;
-
-               // Attach event listeners specific to the registration form
-               const loginBtn = document.querySelector(".login-button");
-               loginBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    renderForm("login");
                });
           }
      },
