@@ -1,49 +1,95 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
 body {
-  font-family: "Roboto Mono", monospace;
+     font-family: "Montserrat", sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f4f4f4;
+     color: #333;
+     line-height: 1.6;
 }
 
-a {
-  color: blue;
+.container {
+     width: 80%;
+     margin: auto;
+     overflow: hidden;
 }
 
-header {
-  .header {
-    a {
-      text-decoration: none;
-      color: red;
-    }
-    border-bottom: 1px solid rgb(210, 66, 66);
-  }
+/* Header */
+.header {
+     background: #50b3a2;
+     color: white;
+     padding: 20px 0;
+     text-align: center;
 }
 
+.header a {
+     color: #ffffff;
+     text-decoration: none;
+}
+
+/* Main */
 main {
-  .container {
-    display: flex;
-    align-items: center;
-    gap: 200px;
-    .title {
-      h2 {
-        font-size: 2rem;
-        color: rgb(232, 164, 37);
-      }
-    }
-    .info-title {
-      font-size: 1.3rem;
-    }
-  }
+     padding: 30px 0;
 }
 
-footer {
-  .footer {
-    h2 {
-      color: rgb(243, 42, 243);
-    }
-  }
+.title {
+     float: left;
+     width: 20%;
 }
 
+.title h2 {
+     border-bottom: 4px solid #50b3a2;
+     padding-bottom: 10px;
+}
+
+.title ul {
+     padding: 0;
+     list-style-type: none;
+}
+
+.title ul li {
+     margin-bottom: 10px;
+}
+
+.title ul li a {
+     text-decoration: none;
+     color: #333;
+     background: #f4f4f4;
+     padding: 5px 10px;
+     border-radius: 2px;
+}
+
+.title ul li a:hover {
+     background: #50b3a2;
+     color: #ffffff;
+}
+
+.info-title {
+     float: right;
+     width: 75%;
+}
+
+/* Footer */
+.footer {
+     background: #50b3a2;
+     color: white;
+     text-align: center;
+     padding: 10px 0;
+     margin-top: 20px;
+}
 button {
-  font-size: 1.2rem;
-  cursor: pointer;
+     padding: 10px 16px;
+     background-color: #50b3a2;
+     border: none;
+     border-radius: 3px;
+     color: white;
+     font-size: 16px;
+     cursor: pointer;
+}
+h3 span {
+     color: transparent; 
+     background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+     background-clip: text; 
+     -webkit-background-clip: text;
 }
