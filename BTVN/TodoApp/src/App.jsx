@@ -29,10 +29,6 @@ function App() {
                               position: "top-right",
                               autoClose: 3000,
                          });
-                         toast.error("Reload lần đầu để lấy tasks", {
-                              position: "top-right",
-                              autoClose: 3000,
-                         });
                     } else {
                          window.alert("Email không hợp lệ");
                          window.location.reload();

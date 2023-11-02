@@ -5,68 +5,55 @@ class Client {
           this.serverApi = serverApi;
      }
 
-     async callApi(url, method, params = {}, body = {}, token = null) {
-          url = this.serverApi + url;
-          if (Object.keys(params).length) {
-               url += "?" + new URLSearchParams(params).toString();
+     async callApi(endpoint, method, params = {}, body = {}, token = null) {
+          let url = new URL(`${this.serverApi}${endpoint}`);
+
+          // Thêm params vào URL nếu có
+          Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
+
+          const headers = { "Content-Type": "application/json" };
+          if (token) {
+               headers["X-Api-Key"] = token;
           }
 
           const options = {
-               method: method,
-               headers: {
-                    "Content-Type": "application/json",
-               },
+               method,
+               headers,
+               body: Object.keys(body).length ? JSON.stringify(body) : null,
           };
 
-          if (token) {
-               options.headers["X-Api-Key"] = token;
-          }
-
-          if (Object.keys(body).length) {
-               options.body = JSON.stringify(body);
-          }
-
           try {
-               const res = await fetch(url, options);
-               const data = await res.json();
-               if (res.ok) {
-                    return {
-                         res,
-                         data,
-                    };
+               const response = await fetch(url, options);
+               const data = await response.json();
+               if (response.ok) {
+                    return { response, data };
                } else {
-                    return {
-                         res,
-                         data: { message: data.message, data: {} },
-                    };
+                    throw new Error(data.message || "An error occurred while fetching data");
                }
-          } catch (e) {
-               console.error("HttpClient error:", e);
-               return {
-                    res: null,
-                    data: { message: e.message, data: {} },
-               };
+          } catch (error) {
+               console.error("Client error:", error);
+               throw error; // Thay vì trả về, ném lỗi ra ngoài để người gọi phương thức xử lý
           }
      }
 
-     get(url, params = {}, token = null) {
-          return this.callApi(url, "GET", params, {}, token);
+     get(endpoint, params = {}, token = null) {
+          return this.callApi(endpoint, "GET", params, {}, token);
      }
 
-     post(url, body, params = {}, token = null) {
-          return this.callApi(url, "POST", params, body, token);
+     post(endpoint, body, params = {}, token = null) {
+          return this.callApi(endpoint, "POST", params, body, token);
      }
 
-     put(url, body, params = {}, token = null) {
-          return this.callApi(url, "PUT", params, body, token);
+     put(endpoint, body, params = {}, token = null) {
+          return this.callApi(endpoint, "PUT", params, body, token);
      }
 
-     patch(url, body, params = {}, token = null) {
-          return this.callApi(url, "PATCH", params, body, token);
+     patch(endpoint, body, params = {}, token = null) {
+          return this.callApi(endpoint, "PATCH", params, body, token);
      }
 
-     delete(url, params = {}, token = null) {
-          return this.callApi(url, "DELETE", params, {}, token);
+     delete(endpoint, params = {}, token = null) {
+          return this.callApi(endpoint, "DELETE", params, {}, token);
      }
 }
 
