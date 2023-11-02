@@ -143,6 +143,8 @@ const goPage = (page) => {
 };
 const getPosts = async (query = {}) => {
      const queryString = new URLSearchParams(query).toString();
+     /// => Chuyển object về dang queryString !!!
+     /// key1=value1&key2=value2.....
      const { data: posts, response } = await client.get("/posts?" + queryString);
      // console.log(queryString);
      // console.log(posts);
@@ -207,7 +209,7 @@ sortByEl.addEventListener("change", function (e) {
 paginationNav.addEventListener("click", (e) => {
      e.preventDefault();
      if (e.target.classList.contains("page-number")) {
-          // goi ham
+          // gọi hàm chuyển trang 
           goPage(+e.target.innerText);
      }
      // prev

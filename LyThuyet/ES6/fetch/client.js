@@ -15,17 +15,16 @@ export const client = {
      send: async function (url, method = "GET", body = null) {
           url = `${this.serverApi}${url}`;
 
+          const options = {
+               method,
+               headers,
+          };
           const headers = {
                "Content-type": "application/json",
           };
           if (this.token) {
                headers["Authorization"] = `Bearer ${this.token}`;
           }
-
-          const options = {
-               method,
-               headers,
-          };
 
           if (body) {
                options.body = JSON.stringify(body);

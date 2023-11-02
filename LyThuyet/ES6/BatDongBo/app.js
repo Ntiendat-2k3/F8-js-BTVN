@@ -124,6 +124,7 @@ getUser2().then((data) => {
 });
 
 // kết hợp async await để đọc thẳng k cần .then
+// 1 lần await tương ứng với 1 lần then
 const getUser_2 = () => {
      return new Promise((resolve, reject) => {
           setTimeout(() => {
