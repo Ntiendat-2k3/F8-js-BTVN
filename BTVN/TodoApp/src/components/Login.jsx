@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Client } from "../api/Client";
+import { Client } from "../api/client";
 import useAlertify from "../hooks/useAlertify";
 import Cookie from "js-cookie";
 import { HtmlScript } from "./HtmlScript";

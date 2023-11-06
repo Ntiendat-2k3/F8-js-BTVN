@@ -4,7 +4,7 @@ import TodoList from "./TodoList";
 import Login from "./Login";
 import Cookie from "js-cookie";
 import useAlertify from "../hooks/useAlertify";
-import { Client } from "../api/Client";
+import { Client } from "../api/client";
 import SearchBox from "./SearchBox";
 
 export default function Body({ handleLoading }) {

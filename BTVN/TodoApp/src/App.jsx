@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import Body from "./components/Body";
-import Loading from "./components/loading";
+import Loading from "./components/Loading";
 import "./assets/style.scss";
 import "./assets/loading.css";
 
