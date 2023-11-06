@@ -1,0 +1,351 @@
+@import url("https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600&display=swap");
+* {
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+}
+body {
+     font-size: 16px;
+     font-family: "Nunito Sans", sans-serif;
+     overflow: hidden;
+     user-select: none;
+}
+:root {
+     --primary-color: #6c5ce7;
+     --black-color: #272a2b;
+     --white-color: #fff;
+}
+input {
+     background-color: inherit;
+     border: 1px solid #ccc;
+     outline: none;
+     padding: 10px;
+     font-size: inherit;
+     font-family: inherit;
+     color: inherit;
+     border-radius: 5px;
+}
+button {
+     cursor: pointer;
+}
+.popup {
+     position: fixed;
+     inset: 15rem 30rem;
+     background: url("./img/bg-1.jpg");
+     visibility: hidden;
+     border-radius: 10px;
+     opacity: 0;
+     transition: 0.25s linear;
+
+     .login-form {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 1px solid #ccc;
+          background-color: var(--white-color);
+          border-radius: 5px;
+
+          .input-box {
+               padding: 20px;
+               input {
+                    width: 20rem;
+                    padding: 12px;
+                    border: 1px solid var(--primary-color);
+               }
+          }
+          .button-box {
+               margin: 5px;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               column-gap: 40px;
+
+               button {
+                    padding: 10px 30px;
+                    border-radius: 5px;
+                    border: 1px solid var(--primary-color);
+                    background-color: inherit;
+                    cursor: pointer;
+                    font-size: inherit;
+                    font-family: inherit;
+                    transition: 0.25s linear;
+                    &:hover {
+                         scale: 1.025;
+                    }
+               }
+               button.save {
+                    background-color: var(--primary-color);
+                    color: var(--white-color);
+               }
+          }
+     }
+}
+.popup.active {
+     visibility: visible;
+     opacity: 1;
+}
+
+.todo {
+     width: 100%;
+
+     .containers {
+          padding: 40px;
+          background: url(./img/bg.jpg) no-repeat;
+          background-size: cover;
+          min-height: 100vh;
+          color: var(--white-color);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+     }
+
+     &-title {
+          font-size: 3rem;
+          font-family: "Love Ya Like A Sister", cursive;
+          margin-bottom: 10px;
+          color: transparent;
+          background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-background-clip: text;
+     }
+     &-AddForm {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 5px;
+          .input-box {
+               color: var(--primary-color);
+               background-color: var(--white-color);
+               border-radius: 3px;
+               font-size: 16px;
+               input {
+                    width: 20rem;
+                    transition: 0.3s linear;
+                    &:focus {
+                         width: 21rem;
+                    }
+               }
+          }
+          button {
+               background-color: var(--primary-color);
+               border: none;
+               font-family: inherit;
+               font-weight: 600;
+               font-size: 16px;
+               color: inherit;
+               padding: 12px 20px;
+               border-radius: 5px;
+               &:hover {
+                    opacity: 0.9;
+               }
+          }
+     }
+     &-list {
+          list-style: none;
+          margin-top: 20px;
+          display: flex;
+          flex-direction: column;
+          row-gap: 20px;
+     }
+     &-work {
+          background-color: var(--white-color);
+          border-radius: 5px;
+          padding: 20px 30px;
+
+          .input-box input {
+               color: var(--black-color);
+               border-radius: 5px;
+               width: 700px;
+          }
+          .button-box {
+               margin-top: 15px;
+               display: flex;
+               align-items: center;
+               column-gap: 15px;
+               padding-bottom: 10px;
+
+               &__left {
+                    color: var(--black-color);
+
+                    > label {
+                         cursor: pointer;
+                         user-select: none;
+                         &::after {
+                              content: "";
+                              display: inline-block;
+                              width: 18px;
+                              height: 18px;
+                              border: 2px solid #aaa;
+                              border-radius: 5px;
+                              margin-left: 5px;
+                              vertical-align: middle;
+                         }
+                    }
+
+                    > input {
+                         width: 40px;
+
+                         &:checked + label::after {
+                              content: "\ea41";
+                              background-color: var(--primary-color);
+                              font-family: "boxicons";
+                              color: var(--white-color);
+                              font-weight: normal;
+                              font-style: normal;
+                              text-align: center;
+                              vertical-align: middle;
+                         }
+                    }
+               }
+
+               &__right {
+                    margin-left: auto;
+                    display: flex;
+                    justify-content: flex-end;
+                    column-gap: 10px;
+               }
+
+               button {
+                    padding: 8px 15px;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: 600;
+                    color: inherit;
+                    border: none;
+                    border-radius: 5px;
+                    :hover {
+                         opacity: 0.9;
+                    }
+               }
+               .edit-btn {
+                    background-color: var(--primary-color);
+               }
+               .delete-btn {
+                    background-color: #e74c3c;
+               }
+               .update-btn {
+                    background-color: var(--primary-color);
+               }
+               .cannel-btn {
+                    background-color: #00d2d3;
+               }
+          }
+     }
+}
+
+.ajs-dialog {
+     border-radius: 8px;
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+     border: none;
+     overflow: hidden;
+     background-color: #00d2d3;
+}
+.ajs-header {
+     color: var(--white-color);
+     padding: 1rem;
+}
+.ajs-body {
+     padding: 1rem;
+     background-color: var(--primary-color);
+     color: var(--white-color);
+     font-size: 18px;
+     border-radius: 5px;
+     margin-bottom: 8px;
+}
+.ajs-footer .ajs-button {
+     border: none;
+     padding: 0.6rem 1rem;
+     border-radius: 5px;
+     background-color: #333;
+     color: var(--white-color);
+     font-size: 14px;
+     cursor: pointer;
+     transition: 0.25s linear;
+}
+.ajs-footer .ajs-button:hover {
+     background-color: var(--black-color);
+     scale: 1.05;
+}
+.ajs-footer .ajs-button.ajs-ok {
+     background-color: #088dfa;
+}
+.ajs-footer .ajs-button.ajs-ok:hover {
+     background-color: #0a9ff5;
+     scale: 1.05;
+}
+.alertify-notifier {
+     position: absolute;
+     top: 0;
+     right: 0;
+     font-weight: 500;
+     font-size: 1rem;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.alertify-notifier .ajs-message.ajs-success {
+     background-color: #2ecc71;
+     color: #fff;
+     border: 1px solid #27ae60;
+}
+
+.alertify-notifier .ajs-message.ajs-error {
+     background-color: #e74c3c;
+     color: #fff;
+     border: 1px solid #c0392b;
+}
+
+.alertify-notifier .ajs-message:not(.ajs-success, .ajs-error) {
+     background-color: #3498db;
+     color: #fff;
+     border: 1px solid #2980b9;
+}
+
+.alertify-notifier .ajs-message {
+     padding: 1rem;
+     margin-bottom: 0.5rem;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+     transition: all 0.3s ease-in-out;
+}
+
+.alertify-notifier .ajs-message:hover {
+     transform: scale(1.05);
+     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+.alertify-notifier.ajs-message.ajs-add {
+     background-color: #2ecc71;
+     color: #fff;
+     border: 1px solid #27ae60;
+}
+.alertify-notifier.ajs-message.ajs-edit {
+     background-color: #f1c40f;
+     color: #fff;
+     border: 1px solid #f39c12;
+}
+
+.alertify-notifier.ajs-message.ajs-delete {
+     background-color: #e74c3c;
+     color: #fff;
+     border: 1px solid #c0392b;
+}
+.search-box {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 20px;
+
+     input {
+          width: 20rem;
+          padding: 12px;
+          border: 1px solid var(--primary-color);
+          border-radius: 5px;
+          transition: all 0.3s;
+          &:focus {
+               width: 21rem;
+               outline: none;
+          }
+     }
+}
